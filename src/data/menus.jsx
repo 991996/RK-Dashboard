@@ -1,55 +1,68 @@
-import DashboardIcon from "@/myComponents/icons/DashboardIcon";
-import ProductsIcon from "@/myComponents/icons/ProductsIcon";
-import CategoryIcon from "@/myComponents/icons/CategoryIcon";
-import InventoryIcon from "@/myComponents/icons/InventoryIcon";
-import OrdersIcon from "@/myComponents/icons/OrdersIcon";
-import PurchasesIcon from "@/myComponents/icons/PurchasesIcon";
-import InvoicesIcon from "@/myComponents/icons/InvoicesIcon";
-import SettingIcon from "@/myComponents/icons/SettingIcon";
+import { MdInventory2, MdCategory, MdDarkMode } from "react-icons/md";
+import { TbLayoutDashboardFilled } from "react-icons/tb";
+import { GiClothes } from "react-icons/gi";
+import { IoBagHandle, IoSettings } from "react-icons/io5";
+import { BiSolidPurchaseTag } from "react-icons/bi";
+import { FaFileInvoiceDollar } from "react-icons/fa6";
 
 export const menuItems = [
   {
     section: "Dashboard",
-    icon: DashboardIcon,
-    items: [{ title: "Dashboard", path: "/" }],
+    icon: TbLayoutDashboardFilled,
+    path: "/",
   },
   {
     section: "Products",
-    icon: ProductsIcon,
+    icon: GiClothes,
     items: [
-      { title: "Users", path: "/users" },
+      { title: "Create", path: "/addProduct" },
       { title: "Products", path: "/products" },
       { title: "Orders", path: "/orders" },
     ],
   },
   {
     section: "Category",
-    icon: CategoryIcon,
+    icon: MdCategory,
     items: [{ title: "Reports", path: "/reports" }],
   },
   {
     section: "inventory",
-    icon: InventoryIcon,
+    icon: MdInventory2,
     items: [{ title: "Settings", path: "/settings" }],
   },
   {
     section: "orders",
-    icon: OrdersIcon,
+    icon: IoBagHandle,
     items: [{ title: "Settings", path: "/settings" }],
   },
   {
     section: "purchases",
-    icon: PurchasesIcon,
+    icon: BiSolidPurchaseTag,
     items: [{ title: "Settings", path: "/settings" }],
   },
   {
     section: "invoices",
-    icon: InvoicesIcon,
+    icon: FaFileInvoiceDollar,
     items: [{ title: "Settings", path: "/settings" }],
   },
   {
     section: "setting",
-    icon: SettingIcon,
+    icon: IoSettings,
     items: [{ title: "Settings", path: "/settings" }],
+  },
+];
+
+export const navBarMenuItems = [
+  {
+    icon: MdDarkMode,
+  },
+  {
+    icon: MdDarkMode,
+  },
+  {
+    icon: MdDarkMode,
+  },
+  {
+    icon: MdDarkMode,
   },
 ];
