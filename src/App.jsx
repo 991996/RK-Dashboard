@@ -1,7 +1,7 @@
 import { Outlet, useMatches } from "react-router-dom";
 import "./App.css";
 import SideBar from "./sideBar/SideBar";
-import NavBar from "./sideBar/NavBar";
+import NavBar from "./navBar/NavBar";
 
 function App() {
   const matches = useMatches();
@@ -10,7 +10,10 @@ function App() {
   return (
     <>
       <div className="flex w-full">
-        <SideBar />
+        <div className="hidden lg:block">
+          <SideBar />
+        </div>
+
         <div className=" w-full flex flex-col gap-0 px-6">
           <NavBar pageTitle={pageTitle} />
           <Outlet />

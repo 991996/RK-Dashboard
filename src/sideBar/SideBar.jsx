@@ -16,9 +16,9 @@ export default function SideBar() {
   const [hover, setHover] = useState(false);
   return (
     <div
-      className={`hidden lg:block text-gray-400
+      className={` text-gray-400
       h-screen bg-primary-black
-      ${pin ? "w-[20%] min-w-55" : "w-17.5"} 
+      ${pin ? "w-70" : "w-17.5"} 
       duration-300 relative hover:w-70`}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
@@ -41,7 +41,7 @@ export default function SideBar() {
         </div>
         <div
           className={`cursor-pointer hover:text-gray-50 duration-300
-            ${pin || hover ? "" : " hidden"}`}
+            ${pin || hover ? "hidden lg:block" : "hidden"}`}
           onClick={() => setPin((prev) => !prev)}
         >
           {pin ? (

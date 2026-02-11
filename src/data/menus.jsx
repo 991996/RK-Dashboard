@@ -1,4 +1,4 @@
-import { MdInventory2, MdCategory, MdDarkMode } from "react-icons/md";
+import { MdInventory2, MdCategory } from "react-icons/md";
 import { TbLayoutDashboardFilled } from "react-icons/tb";
 import { GiClothes } from "react-icons/gi";
 import { IoBagHandle, IoSettings } from "react-icons/io5";
@@ -49,20 +49,5 @@ export const menuItems = [
     section: "setting",
     icon: IoSettings,
     items: [{ title: "Settings", path: "/settings" }],
-  },
-];
-
-export const navBarMenuItems = [
-  {
-    icon: MdDarkMode,
-  },
-  {
-    icon: MdDarkMode,
-  },
-  {
-    icon: MdDarkMode,
-  },
-  {
-    icon: MdDarkMode,
   },
 ];
