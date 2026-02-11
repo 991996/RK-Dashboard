@@ -1,3 +1,9 @@
+import UploadPhoto from "../UploadPhoto";
+
 export default function AddProduct() {
-  return <p>add product</p>;
+  return (
+    <div>
+      <UploadPhoto />
+    </div>
+  );
 }

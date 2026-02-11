@@ -16,7 +16,7 @@ export default function SideBar() {
   const [hover, setHover] = useState(false);
   return (
     <div
-      className={` text-gray-400
+      className={` text-gray-400 shadow-lg shadow-gray-200/14
       h-screen bg-primary-black
       ${pin ? "w-70" : "w-17.5"} 
       duration-300 relative hover:w-70`}

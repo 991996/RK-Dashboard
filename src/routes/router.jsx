@@ -19,6 +19,10 @@ const router = createBrowserRouter([
         element: <AddProduct />,
         handle: { pageTitle: "Create Product" },
       },
+      {
+        path: "*",
+        element: <NotFound404 />,
+      },
     ],
   },
   {

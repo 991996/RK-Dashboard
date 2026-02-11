@@ -10,6 +10,7 @@
   --color-primary-black: #262d34;
   --default-font-family: "Play", sans-serif;
   --font-hanken: "Hanken Grotesk", sans-serif;
+  --font-play: "Play", sans-serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
