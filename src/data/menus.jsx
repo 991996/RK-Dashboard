@@ -16,7 +16,7 @@ export const menuItems = [
     icon: GiClothes,
     items: [
       { title: "Create", path: "/addProduct" },
-      { title: "Products", path: "/products" },
+      { title: "View Products", path: "/products" },
       { title: "Orders", path: "/orders" },
     ],
   },

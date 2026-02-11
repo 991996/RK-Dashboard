@@ -8,6 +8,7 @@
   /* RK colors */
   --color-primary-red: #dc143c;
   --color-primary-black: #262d34;
+  --color-primary-white: #f9f7f7;
   --default-font-family: "Play", sans-serif;
   --font-hanken: "Hanken Grotesk", sans-serif;
   --font-play: "Play", sans-serif;
@@ -53,7 +54,7 @@
 
 :root {
   --radius: 0.625rem;
-  --background: #f9f7f7;
+  --background: var(--color-primary-white);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
