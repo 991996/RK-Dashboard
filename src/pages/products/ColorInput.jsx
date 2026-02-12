@@ -1,29 +1,10 @@
 import { Button } from "@/components/ui/button";
+import { colorClasses, colorsList } from "@/data/productList";
 
-export default function ColorInput() {
-  const colorsList = [
-    "red",
-    "black",
-    "white",
-    "blue",
-    "green",
-    "yellow",
-    "orange",
-    "pink",
-  ];
-  const colorClasses = {
-    red: "bg-red-500",
-    black: "bg-black",
-    white: "bg-white",
-    blue: "bg-blue-500",
-    green: "bg-green-500",
-    yellow: "bg-yellow-500",
-    orange: "bg-orange-500",
-    pink: "bg-pink-500",
-  };
+export default function ColorInput({ colors = colorsList }) {
   return (
-    <div className="flex gap-2">
-      {colorsList.map((color, index) => {
+    <div className="flex flex-wrap gap-2">
+      {colors.map((color, index) => {
         return (
           <Button
             key={index}

@@ -16,9 +16,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import PrimaryButton from "@/myComponents/PrimaryButton";
-import OutlineButton from "@/myComponents/OutlineButton";
-import { Button } from "@/components/ui/button";
+
 import TagInput from "./TagInput";
 import ColorInput from "./ColorInput";
 import SizeInput from "./SizeInput";
@@ -40,7 +38,7 @@ export function ProductInfoForm() {
           <FieldGroup>
             <FieldSet>
               <FieldGroup>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <Field>
                     <FieldLabel htmlFor="name">Product Name</FieldLabel>
                     <Input id="name" placeholder="Item's Name" required />
@@ -64,7 +62,7 @@ export function ProductInfoForm() {
                     </Select>
                   </Field>
                 </div>
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
                   <Field>
                     <FieldLabel htmlFor="brand">Brand</FieldLabel>
                     <Input id="brand" placeholder="Brand Name" required />
@@ -94,7 +92,7 @@ export function ProductInfoForm() {
             <FieldSeparator />
             <FieldSet>
               <FieldGroup>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
                   <Field>
                     <FieldLabel htmlFor="size">Size</FieldLabel>
                     <SizeInput />
@@ -118,7 +116,7 @@ export function ProductInfoForm() {
                   />
                 </Field>
 
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   <Field>
                     <FieldLabel htmlFor="tagNumber">Tag Number</FieldLabel>
                     <Input id="tagNumber" placeholder="#******" type="number" />
@@ -139,10 +137,6 @@ export function ProductInfoForm() {
                 </div>
               </FieldGroup>
             </FieldSet>
-            <Field orientation="horizontal">
-              <PrimaryButton text="Submit" type="submit" />
-              <OutlineButton text="cancel" />
-            </Field>
           </FieldGroup>
         </form>
       </CardContent>

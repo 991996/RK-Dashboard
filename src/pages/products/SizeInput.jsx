@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
+import { sizeList } from "@/data/productList";
 
-export default function SizeInput() {
-  const sizeList = ["XS", "S", "M", "L", "XL", "XXL", "3XL"];
+export default function SizeInput({ sizes = sizeList }) {
   return (
-    <div className="flex gap-1">
-      {sizeList.map((size, index) => {
+    <div className="flex flex-wrap gap-1">
+      {sizes.map((size, index) => {
         return (
           <Button
             key={index}

@@ -76,7 +76,7 @@ export default function UploadPhoto({ maxFiles = 5 }) {
                 </p>
               )}
 
-              <p className="text-sm font-play text-gray-400">
+              <p className="text-xs md:text-sm font-play text-gray-400 text-center">
                 1600 x 1200 (4:3) recommended. PNG, JPG and GIF files are
                 allowed
               </p>
