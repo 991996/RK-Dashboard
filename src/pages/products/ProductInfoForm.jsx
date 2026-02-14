@@ -22,7 +22,6 @@ import ColorInput from "./ColorInput";
 import SizeInput from "./SizeInput";
 
 export function ProductInfoForm({ product, dispatch }) {
-  console.log(product);
   return (
     <Card
       className="text-gray-500 dark:text-gray-300 text-lg
@@ -57,24 +56,34 @@ export function ProductInfoForm({ product, dispatch }) {
                 </Field>
                 <Field>
                   <FieldLabel htmlFor="category">Category</FieldLabel>
-                  <Select defaultValue="">
+                  <Select
+                    defaultValue={product.category}
+                    onValueChange={(value) =>
+                      dispatch({
+                        type: "UPDATE_FIELD",
+                        field: "category",
+                        value: value,
+                      })
+                    }
+                  >
                     <SelectTrigger id="category">
                       <SelectValue placeholder="Choose a Category" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
-                        <SelectItem value="2024">2024</SelectItem>
-                        <SelectItem value="2025">2025</SelectItem>
-                        <SelectItem value="2026">2026</SelectItem>
-                        <SelectItem value="2027">2027</SelectItem>
-                        <SelectItem value="2028">2028</SelectItem>
-                        <SelectItem value="2029">2029</SelectItem>
+                        <SelectItem value="women clothes">
+                          Women Clothes
+                        </SelectItem>
+                        <SelectItem value="men clothes">Men Clothes</SelectItem>
+                        <SelectItem value="kids clothes">
+                          Kids Clothes
+                        </SelectItem>
                       </SelectGroup>
                     </SelectContent>
                   </Select>
                 </Field>
               </div>
-              <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 gap-4">
                 <Field>
                   <FieldLabel htmlFor="brand">Brand</FieldLabel>
                   <Input
@@ -106,21 +115,6 @@ export function ProductInfoForm({ product, dispatch }) {
                       })
                     }
                   />
-                </Field>
-                <Field>
-                  <FieldLabel htmlFor="gender">Gender</FieldLabel>
-                  <Select defaultValue="">
-                    <SelectTrigger id="gender">
-                      <SelectValue placeholder="Select Gender" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectItem value="man">Man</SelectItem>
-                        <SelectItem value="woman">Woman</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
                 </Field>
               </div>
             </FieldGroup>
@@ -196,7 +190,7 @@ export function ProductInfoForm({ product, dispatch }) {
                 </Field>
                 <Field>
                   <FieldLabel htmlFor="gender">Tag</FieldLabel>
-                  <TagInput />
+                  <TagInput product={product} dispatch={dispatch} />
                 </Field>
               </div>
             </FieldGroup>

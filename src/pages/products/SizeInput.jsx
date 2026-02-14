@@ -17,8 +17,9 @@ export default function SizeInput({ sizes = sizeList, product, dispatch }) {
               }`}
             onClick={() => {
               dispatch({
-                type: "TOGGLE_SIZE",
-                payload: size,
+                type: "TOGGLE_FIELD",
+                field: "sizes",
+                value: size,
               });
             }}
           >

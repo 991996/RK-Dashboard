@@ -10,7 +10,7 @@ import SideBar from "@/sideBar/SideBar";
 
 export default function NavBar({ pageTitle = "Dashboard" }) {
   return (
-    <div className="w-full sticky top-0 left-0 py-6 bg-primary-white dark:bg-primary-black">
+    <div className="z-100 w-full sticky top-0 left-0 py-6 bg-primary-white dark:bg-primary-black">
       {/* Content */}
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-4 text-gray-500 dark:text-gray-300 duration-300">

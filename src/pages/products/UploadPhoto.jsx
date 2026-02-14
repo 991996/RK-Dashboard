@@ -1,88 +1,106 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
 import { useState, useCallback, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import { Button } from "@/components/ui/button";
 import { CloudUpload } from "lucide-react";
 
-export default function UploadPhoto({ maxFiles = 5 }) {
+export default function UploadPhoto({ maxFiles = 5, dispatch }) {
   const [files, setFiles] = useState([]);
 
-  // عند اختيار الصور أو سحبها
+  // add images
   const onDrop = useCallback(
     (acceptedFiles) => {
-      const mappedFiles = acceptedFiles.map((file) =>
-        Object.assign(file, { preview: URL.createObjectURL(file) })
+      if (files.length >= maxFiles) return;
+
+      const remainingSlots = maxFiles - files.length;
+
+      const mappedFiles = acceptedFiles.slice(0, remainingSlots).map((file) =>
+        Object.assign(file, {
+          preview: URL.createObjectURL(file),
+          id: crypto.randomUUID(),
+        })
       );
 
-      // الحد الأقصى للصور
-      setFiles((prev) => [...prev, ...mappedFiles].slice(0, maxFiles));
+      setFiles((prev) => [...prev, ...mappedFiles]);
+      dispatch({
+        type: "ADD_IMAGE",
+        payload: mappedFiles,
+      });
     },
-    [maxFiles]
+    [files, maxFiles, dispatch]
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: { "image/*": [] },
     multiple: true,
+    disabled: files.length >= maxFiles,
   });
 
-  // تنظيف الـ preview URLs لتجنب تسرب الذاكرة
+  // cleanup memory
   useEffect(() => {
     return () => {
       files.forEach((file) => URL.revokeObjectURL(file.preview));
     };
   }, [files]);
 
-  const removeFile = (file) => {
-    setFiles((prev) => prev.filter((f) => f !== file));
-    URL.revokeObjectURL(file.preview);
-  };
+  // remove image
+  const removeFile = useCallback(
+    (fileToRemove) => {
+      setFiles((prev) => prev.filter((file) => file.id !== fileToRemove.id));
+
+      URL.revokeObjectURL(fileToRemove.preview);
+
+      dispatch({
+        type: "REMOVE_IMAGE",
+        payload: fileToRemove,
+      });
+    },
+    [dispatch]
+  );
 
   return (
-    <Card
-      className=" font-hanken text-gray-700 dark:text-gray-300 text-lg
-    dark:bg-primary-black"
-    >
+    <Card className="font-hanken text-gray-700 dark:text-gray-300 text-lg dark:bg-primary-black">
       <CardHeader>
         <CardTitle>Add Product Photo</CardTitle>
         <hr />
       </CardHeader>
+
       <CardContent>
         <div className="flex flex-col gap-4">
           {/* Dropzone */}
           <div
             {...getRootProps()}
-            className={`border-2 border-dashed rounded-lg p-6 flex flex-col items-center justify-center cursor-pointer transition-colors duration-200 ${
-              isDragActive
+            className={`border-2 border-dashed rounded-lg p-6 flex flex-col items-center justify-center cursor-pointer transition
+            ${
+              files.length >= maxFiles
+                ? "opacity-50 cursor-not-allowed"
+                : isDragActive
                 ? "border-primary-red bg-gray-100 dark:bg-gray-800"
                 : "border-gray-300 dark:border-gray-600"
             }`}
           >
             <input {...getInputProps()} />
-            <div className="flex flex-col gap-4 items-center py-10">
-              <div className="text-primary-red">
-                <CloudUpload size={44} />
-              </div>
 
-              {isDragActive ? (
-                <p className="text-center text-2xl">Drop images here...</p>
+            <div className="flex flex-col gap-4 items-center py-10">
+              <CloudUpload size={44} className="text-primary-red" />
+
+              {files.length >= maxFiles ? (
+                <p className="text-center text-xl text-red-500">
+                  Maximum {maxFiles} images reached
+                </p>
+              ) : isDragActive ? (
+                <p className="text-center text-xl">Drop images here...</p>
               ) : (
-                <p className="text-center text-2xl">
-                  Drag & drop images here, or{" "}
-                  <span className="text-primary-red">
-                    click to select (max {maxFiles})
-                  </span>
+                <p className="text-center text-xl">
+                  Drag & drop images or click to select
                 </p>
               )}
 
-              <p className="text-xs md:text-sm font-play text-gray-400 text-center">
-                1600 x 1200 (4:3) recommended. PNG, JPG and GIF files are
-                allowed
-              </p>
               <Button
                 variant="outline"
-                className="cursor-pointer dark:text-gray-100"
+                disabled={files.length >= maxFiles}
+                className="cursor-pointer"
               >
                 Select Images
               </Button>
@@ -92,16 +110,17 @@ export default function UploadPhoto({ maxFiles = 5 }) {
           {/* Preview */}
           {files.length > 0 && (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {files.map((file, index) => (
-                <div key={index} className="relative group">
+              {files.map((file) => (
+                <div key={file.id} className="relative group">
                   <img
                     src={file.preview}
-                    alt="preview"
-                    className="w-full h-40 object-cover rounded-md border transition-transform duration-200 group-hover:scale-105"
+                    className="w-full h-40 object-cover rounded-md border"
                   />
+
                   <button
                     onClick={() => removeFile(file)}
-                    className="absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-red-600"
+                    className="absolute top-1 right-1 bg-red-500 text-white
+                    rounded-full w-6 h-6 opacity-0 group-hover:opacity-100"
                   >
                     ✕
                   </button>

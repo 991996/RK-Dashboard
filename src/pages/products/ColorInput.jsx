@@ -17,8 +17,9 @@ export default function ColorInput({ colors = colorsList, product, dispatch }) {
               }`}
             onClick={() => {
               dispatch({
-                type: "TOGGLE_COLOR",
-                payload: color,
+                type: "TOGGLE_FIELD",
+                field: "colors",
+                value: color,
               });
             }}
           >

@@ -13,19 +13,18 @@ export default function AddProduct() {
     id: uuidv4(),
     name: "",
     images: [],
-    category: null,
+    category: "",
     brand: "",
     weight: "",
-    gender: "",
     sizes: [],
     colors: [],
     description: "",
     tagNumber: "",
     stock: 0,
     tags: [],
-    price: 0,
-    discount: 0,
-    tax: 0,
+    price: 0.0,
+    discount: 0.0,
+    tax: 0.0,
   };
   const [product, dispatch] = useReducer(productReducer, initialState);
   //console.log(product);
@@ -35,7 +34,7 @@ export default function AddProduct() {
     xl:grid-cols-4 gap-y-4 xl:gap-4 py-6"
     >
       <div className="col-span-3 flex flex-col gap-4">
-        <UploadPhoto />
+        <UploadPhoto product={product} dispatch={dispatch} />
         <ProductInfoForm product={product} dispatch={dispatch} />
         <PricingDetails product={product} dispatch={dispatch} />
         <div className="flex flex-col md:flex-row gap-3">

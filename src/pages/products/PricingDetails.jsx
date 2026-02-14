@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
-import { DollarSign } from "lucide-react";
+import { DollarSign, Percent } from "lucide-react";
 import { MdDiscount } from "react-icons/md";
 import { TbTax } from "react-icons/tb";
 
@@ -56,7 +56,7 @@ export function PricingDetails({ product, dispatch }) {
                       className="bg-gray-200 text-gray-600
                       hover:bg-gray-300"
                     >
-                      <MdDiscount />
+                      <Percent />
                     </Button>
                     <Input
                       id="discount"

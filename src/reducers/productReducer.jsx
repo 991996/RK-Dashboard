@@ -5,22 +5,39 @@ export default function productReducer(state, action) {
         ...state,
         [action.field]: action.value,
       };
-    case "TOGGLE_SIZE": {
-      const exists = state.sizes.includes(action.payload);
+
+    case "TOGGLE_FIELD": {
+      const exists = state[action.field].includes(action.value);
       return {
         ...state,
-        sizes: exists
-          ? state.sizes.filter((size) => size !== action.payload)
-          : [...state.sizes, action.payload],
+        [action.field]: exists
+          ? state[action.field].filter((color) => color !== action.value)
+          : [...state[action.field], action.value],
       };
     }
-    case "TOGGLE_COLOR": {
-      const exists = state.colors.includes(action.payload);
+
+    case "ADD_IMAGE": {
       return {
         ...state,
-        colors: exists
-          ? state.colors.filter((color) => color !== action.payload)
-          : [...state.colors, action.payload],
+        images: [...state.images, ...action.payload],
+      };
+    }
+    case "REMOVE_IMAGE": {
+      return {
+        ...state,
+        images: state.images.filter((image) => image.id !== action.payload.id),
+      };
+    }
+    case "ADD_TAG": {
+      return {
+        ...state,
+        tags: [...state.tags, action.payload],
+      };
+    }
+    case "REMOVE_TAG": {
+      return {
+        ...state,
+        tags: state.tags.filter((tag) => tag !== action.payload),
       };
     }
     default:
