@@ -8,7 +8,6 @@ import { useReducer, useState } from "react";
 import productReducer from "@/reducers/productReducer";
 import { createProduct } from "@/services/productService";
 import UploadLoader from "@/myComponents/UploadLoader";
-import AddedSuccessfully from "./AddedSuccessfully";
 import { useNavigate } from "react-router-dom";
 
 export default function AddProduct() {
