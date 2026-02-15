@@ -22,7 +22,7 @@ export default function ProductCard({ product }) {
           <ImagesCarousel product={product} />
 
           {/* product name */}
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-1">
             <h1 className="font-semibold text-lg text-gray-700">
               {product?.name || "Product Name"}
             </h1>
