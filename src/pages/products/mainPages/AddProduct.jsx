@@ -1,7 +1,7 @@
-import { PricingDetails } from "../PricingDetails";
-import ProductCard from "../ProductCard";
-import { ProductInfoForm } from "../ProductInfoForm";
-import UploadPhoto from "../UploadPhoto";
+import { PricingDetails } from "../cards/PricingDetails";
+import ProductCard from "../cards/ProductCard";
+import { ProductInfoForm } from "../cards/ProductInfoForm";
+import UploadPhoto from "../inputs/UploadPhoto";
 import PrimaryButton from "@/myComponents/PrimaryButton";
 import OutlineButton from "@/myComponents/OutlineButton";
 import { useReducer, useState } from "react";

@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 export default function OutlineButton({
   text,
   type = "button",
-  icon = {},
+  icon = null,
   ...props
 }) {
   return (

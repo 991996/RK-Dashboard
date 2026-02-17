@@ -4,6 +4,8 @@ import {
   addDoc,
   serverTimestamp,
   getDocs,
+  deleteDoc,
+  doc,
 } from "firebase/firestore";
 
 // CREATE PRODUCT
@@ -38,4 +40,9 @@ export const fetchProducts = async () => {
     console.log("Error while get the products: ", error);
     return [];
   }
+};
+
+// Delete Product
+export const deleteProduct = async (id) => {
+  await deleteDoc(doc(db, "products", id));
 };

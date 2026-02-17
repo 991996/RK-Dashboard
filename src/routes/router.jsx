@@ -14,22 +14,22 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Dashboard />,
-        handle: { pageTitle: "Dashboard" },
+        handle: { pageTitle: "Dashboard", navActive: "dashboard" },
       },
       {
         path: "/addProduct",
         element: <AddProduct />,
-        handle: { pageTitle: "Create Product" },
+        handle: { pageTitle: "Create Product", navActive: "products" },
       },
       {
         path: "/added_successfully",
         element: <AddedSuccessfully />,
-        handle: { pageTitle: "Create Product" },
+        handle: { pageTitle: "Create Product", navActive: "products" },
       },
       {
         path: "/products",
         element: <ViewProducts />,
-        handle: { pageTitle: "Products" },
+        handle: { pageTitle: "Products", navActive: "products" },
       },
       {
         path: "*",

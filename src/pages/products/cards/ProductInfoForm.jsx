@@ -17,9 +17,9 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import TagInput from "./TagInput";
-import ColorInput from "./ColorInput";
-import SizeInput from "./SizeInput";
+import TagInput from "../inputs/TagInput";
+import ColorInput from "../inputs/ColorInput";
+import SizeInput from "../inputs/SizeInput";
 
 export function ProductInfoForm({ product, dispatch }) {
   return (

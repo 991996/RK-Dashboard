@@ -10,16 +10,15 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { BsFillPinAngleFill, BsFillPinFill } from "react-icons/bs";
 
-export default function SideBar() {
-  const [navActive, setNavActive] = useState(menuItems[0]);
+export default function SideBar({ navActive }) {
   const [pin, setPin] = useState(true);
   const [hover, setHover] = useState(false);
   return (
     <div
       className={` sticky top-0 left-0 text-gray-400 shadow-lg shadow-gray-200/14
-      h-screen bg-primary-black
+      h-screen bg-primary-black z-200
       ${pin ? "w-70" : "w-17.5"} 
-      duration-300 relative hover:w-70`}
+      duration-300 relative hover:w-70 `}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
@@ -62,11 +61,10 @@ export default function SideBar() {
               key={index}
               to={menu.path}
               className={`${
-                navActive === menu
+                navActive.toLowerCase() === menu.section.toLowerCase()
                   ? "text-gray-50 border-l-4 border-primary-red"
                   : ""
               } px-6 py-3 hover:text-gray-50 duration-300`}
-              onClick={() => setNavActive(menu)}
             >
               <NavItem menu={menu} />
             </Link>
@@ -80,7 +78,7 @@ export default function SideBar() {
               <AccordionItem value={`item-${index}`}>
                 <AccordionTrigger
                   className={`${
-                    navActive === menu
+                    navActive.toLowerCase() === menu.section.toLowerCase()
                       ? "text-gray-50 border-l-4 border-primary-red"
                       : ""
                   } px-6 cursor-pointer hover:text-gray-50 duration-300
@@ -97,7 +95,6 @@ export default function SideBar() {
                           key={i}
                           className="px-4 font-[450]
                         hover:text-gray-50 duration-300"
-                          onClick={() => setNavActive(menu)}
                         >
                           {item.title}
                         </Link>
@@ -117,7 +114,11 @@ export default function SideBar() {
     return (
       <div className="flex items-center gap-4 group">
         <div
-          className={`${navActive === menu ? "text-primary-red" : ""} w-4.5`}
+          className={`${
+            navActive.toLowerCase() === menu.section.toLowerCase()
+              ? "text-primary-red"
+              : ""
+          } w-4.5`}
         >
           <menu.icon size={20} />
         </div>
