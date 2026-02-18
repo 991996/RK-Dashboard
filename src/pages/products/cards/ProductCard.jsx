@@ -6,8 +6,8 @@ import ImagesCarousel from "../inputs/ImagesCarousel";
 import { Separator } from "@/components/ui/separator";
 
 export default function ProductCard({ product }) {
-  const price = Number(product.price) || 0;
-  const discount = Number(product.discount) || 0;
+  const price = Number(product?.price) || 0;
+  const discount = Number(product?.discount) || 0;
   const discountedPrice = price * (1 - discount / 100);
 
   return (
@@ -19,7 +19,7 @@ export default function ProductCard({ product }) {
         <div className="flex flex-col gap-4">
           {/* Product image */}
 
-          <ImagesCarousel product={product} />
+          <ImagesCarousel images={product.images} />
 
           {/* product name */}
           <div className="flex flex-wrap items-center gap-1">
@@ -27,14 +27,14 @@ export default function ProductCard({ product }) {
               {product?.name || "Product Name"}
             </h1>
             <p className="text-sm capitalize">
-              ({product.category !== "" ? product.category : "Category"})
+              ({product?.category !== "" ? product?.category : "Category"})
             </p>
           </div>
           {/* price */}
           <div className="flex flex-col gap-1">
             <Label>Price:</Label>
             {/* check if there is a discount */}
-            {product.discount > 0 ? (
+            {product?.discount > 0 ? (
               <div className="flex gap-2 font-medium items-center">
                 <p className=" line-through">${price.toFixed(2)}</p>
                 <p className="text-gray-700">${discountedPrice.toFixed(2)}</p>
@@ -81,16 +81,16 @@ export default function ProductCard({ product }) {
             </div>
           </div>
           {/* TAGS */}
-          {product.tags.length !== 0 ? (
+          {product?.tags.length !== 0 ? (
             <>
               <Separator />
               <div className="flex items-center gap-2">
                 <Label>Tags:</Label>
                 <div className="flex flex-wrap gap-1">
-                  {product.tags.map((tag, index) => (
+                  {product?.tags.map((tag, index) => (
                     <p key={index} className=" text-xs text-gray-900">
                       {tag}
-                      {product.tags.length - 1 === index ? "." : ","}
+                      {product?.tags.length - 1 === index ? "." : ","}
                     </p>
                   ))}
                 </div>

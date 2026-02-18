@@ -6,7 +6,10 @@ import {
   getDocs,
   deleteDoc,
   doc,
+  getDoc,
+  updateDoc,
 } from "firebase/firestore";
+import { productImages } from "@/data/productList";
 
 // CREATE PRODUCT
 export const createProduct = async (product) => {
@@ -14,7 +17,7 @@ export const createProduct = async (product) => {
     // add created time to product
     const docRef = await addDoc(collection(db, "products"), {
       ...product,
-      images: [],
+      images: productImages,
       createdAt: serverTimestamp(),
     });
 
@@ -32,7 +35,7 @@ export const fetchProducts = async () => {
   try {
     const querySnapshot = await getDocs(collection(db, "products"));
     const productsArray = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
+      firestoreId: doc.id,
       ...doc.data(),
     }));
     return productsArray;
@@ -45,4 +48,28 @@ export const fetchProducts = async () => {
 // Delete Product
 export const deleteProduct = async (id) => {
   await deleteDoc(doc(db, "products", id));
+};
+
+// get product by id
+export const fetchProduct = async (id) => {
+  try {
+    const docRef = doc(db, "products", id);
+    const docSnap = await getDoc(docRef);
+
+    if (!docSnap.exists()) return null;
+
+    return {
+      firestoreId: docSnap.id,
+      ...docSnap.data(),
+    };
+  } catch (error) {
+    console.error("Error fetching product:", error);
+    throw error;
+  }
+};
+
+// Edit product
+export const updateProduct = async (id, data) => {
+  const productRef = doc(db, "products", id);
+  await updateDoc(productRef, data);
 };

@@ -4,6 +4,7 @@ export default function OutlineButton({
   text,
   type = "button",
   icon = null,
+  onClick,
   ...props
 }) {
   return (
@@ -11,6 +12,7 @@ export default function OutlineButton({
       type={type}
       variant="outline"
       className=" capitalize rounded-lg cursor-pointer"
+      onClick={onClick}
       {...props}
     >
       {text} {icon}

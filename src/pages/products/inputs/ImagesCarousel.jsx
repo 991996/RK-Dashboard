@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -7,10 +7,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-export default function ImagesCarousel({ product }) {
-  const images = useMemo(() => {
-    return product?.images || [];
-  }, [product]);
+export default function ImagesCarousel({ images = [] }) {
   const [api, setApi] = useState(null);
   const [current, setCurrent] = useState(1);
 
@@ -38,10 +35,10 @@ export default function ImagesCarousel({ product }) {
       <Carousel setApi={setApi} className="w-full">
         <CarouselContent>
           {images.map((img, index) => (
-            <CarouselItem key={img.id || index}>
+            <CarouselItem key={index}>
               <div className="w-full aspect-square bg-gray-200 rounded-lg">
                 <img
-                  src={img.preview || img.url}
+                  src={img}
                   alt={`product-${index}`}
                   className="w-full h-full object-cover rounded-lg"
                 />

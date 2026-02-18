@@ -1,25 +1,45 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { useDropzone } from "react-dropzone";
 import { Button } from "@/components/ui/button";
 import { CloudUpload } from "lucide-react";
 
-export default function UploadPhoto({ maxFiles = 5, dispatch }) {
+export default function UploadPhoto({ maxFiles = 5, dispatch, images = [] }) {
   const [files, setFiles] = useState([]);
+  const initialized = useRef(false); // ✅ لتأكد أننا نعين الصور القديمة مرة واحدة فقط
 
-  // add images
+  // تحويل الصور القديمة إلى نفس structure مرة واحدة فقط
+  useEffect(() => {
+    if (!images || images.length === 0) return;
+
+    if (!initialized.current) {
+      const mappedImages = images.map((url) => ({
+        id: crypto.randomUUID(),
+        preview: url,
+        file: null,
+        existing: true,
+      }));
+
+      setFiles(mappedImages);
+      initialized.current = true; // ✅ بعد هذه المرة لن يعاد التعيين
+    }
+  }, [images]);
+
+  // إضافة صور جديدة
   const onDrop = useCallback(
     (acceptedFiles) => {
       if (files.length >= maxFiles) return;
 
       const remainingSlots = maxFiles - files.length;
 
-      const mappedFiles = acceptedFiles.slice(0, remainingSlots).map((file) =>
-        Object.assign(file, {
-          preview: URL.createObjectURL(file),
+      const mappedFiles = acceptedFiles
+        .slice(0, remainingSlots)
+        .map((file) => ({
           id: crypto.randomUUID(),
-        })
-      );
+          preview: URL.createObjectURL(file),
+          file: file,
+          existing: false,
+        }));
 
       setFiles((prev) => [...prev, ...mappedFiles]);
       dispatch({
@@ -37,19 +57,15 @@ export default function UploadPhoto({ maxFiles = 5, dispatch }) {
     disabled: files.length >= maxFiles,
   });
 
-  // cleanup memory
-  useEffect(() => {
-    return () => {
-      files.forEach((file) => URL.revokeObjectURL(file.preview));
-    };
-  }, [files]);
-
-  // remove image
+  // حذف صورة
   const removeFile = useCallback(
     (fileToRemove) => {
       setFiles((prev) => prev.filter((file) => file.id !== fileToRemove.id));
 
-      URL.revokeObjectURL(fileToRemove.preview);
+      // فقط revoke للصور الجديدة
+      if (!fileToRemove.existing && fileToRemove.preview.startsWith("blob:")) {
+        URL.revokeObjectURL(fileToRemove.preview);
+      }
 
       dispatch({
         type: "REMOVE_IMAGE",
@@ -58,6 +74,11 @@ export default function UploadPhoto({ maxFiles = 5, dispatch }) {
     },
     [dispatch]
   );
+
+  const getPreview = (file) => {
+    if (typeof file.preview === "string") return file.preview;
+    return file.preview.preview;
+  };
 
   return (
     <Card className="font-hanken text-gray-700 dark:text-gray-300 text-lg dark:bg-primary-black">
@@ -113,7 +134,8 @@ export default function UploadPhoto({ maxFiles = 5, dispatch }) {
               {files.map((file) => (
                 <div key={file.id} className="relative group">
                   <img
-                    src={file.preview}
+                    src={getPreview(file)}
+                    alt="product"
                     className="w-full h-40 object-cover rounded-md border"
                   />
 

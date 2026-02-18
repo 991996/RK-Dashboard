@@ -8,7 +8,7 @@ import { useReducer, useState } from "react";
 import productReducer from "@/reducers/productReducer";
 import { createProduct } from "@/services/productService";
 import UploadLoader from "@/myComponents/UploadLoader";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function AddProduct() {
   const initialState = {
@@ -52,11 +52,13 @@ export default function AddProduct() {
         <ProductCard product={product} />
         <div className="flex flex-col gap-3">
           <PrimaryButton text="Submit" onClick={handleSave} />
-          <OutlineButton text="cancel" />
+          <Link to="/products" className="w-full cursor-pointer">
+            <OutlineButton text="Cancel" className="w-full" />
+          </Link>
         </div>
       </div>
       <div className="col-span-3 flex flex-col gap-4 order-1 xl:order-2">
-        <UploadPhoto product={product} dispatch={dispatch} />
+        <UploadPhoto dispatch={dispatch} />
         <ProductInfoForm product={product} dispatch={dispatch} />
         <PricingDetails product={product} dispatch={dispatch} />
       </div>

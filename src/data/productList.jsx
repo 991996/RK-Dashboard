@@ -20,3 +20,10 @@ export const colorClasses = {
 };
 
 export const sizeList = ["XS", "S", "M", "L", "XL", "XXL", "3XL"];
+
+export const productImages = [
+  "https://techzaa.in/larkon/admin/assets/images/product/p-1.png",
+  "https://techzaa.in/larkon/admin/assets/images/product/p-10.png",
+  "https://techzaa.in/larkon/admin/assets/images/product/p-13.png",
+  "https://techzaa.in/larkon/admin/assets/images/product/p-14.png",
+];

@@ -40,6 +40,9 @@ export default function productReducer(state, action) {
         tags: state.tags.filter((tag) => tag !== action.payload),
       };
     }
+    case "SET_PRODUCT": {
+      return action.payload;
+    }
     default:
       return state;
   }

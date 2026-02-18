@@ -61,7 +61,7 @@ export default function SideBar({ navActive }) {
               key={index}
               to={menu.path}
               className={`${
-                navActive.toLowerCase() === menu.section.toLowerCase()
+                navActive?.toLowerCase() === menu.section?.toLowerCase()
                   ? "text-gray-50 border-l-4 border-primary-red"
                   : ""
               } px-6 py-3 hover:text-gray-50 duration-300`}
@@ -78,7 +78,7 @@ export default function SideBar({ navActive }) {
               <AccordionItem value={`item-${index}`}>
                 <AccordionTrigger
                   className={`${
-                    navActive.toLowerCase() === menu.section.toLowerCase()
+                    navActive?.toLowerCase() === menu.section?.toLowerCase()
                       ? "text-gray-50 border-l-4 border-primary-red"
                       : ""
                   } px-6 cursor-pointer hover:text-gray-50 duration-300
@@ -115,7 +115,7 @@ export default function SideBar({ navActive }) {
       <div className="flex items-center gap-4 group">
         <div
           className={`${
-            navActive.toLowerCase() === menu.section.toLowerCase()
+            navActive?.toLowerCase() === menu.section?.toLowerCase()
               ? "text-primary-red"
               : ""
           } w-4.5`}

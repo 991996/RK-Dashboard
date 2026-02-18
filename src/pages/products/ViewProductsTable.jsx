@@ -14,12 +14,14 @@ import { IoEyeOutline } from "react-icons/io5";
 import { CiEdit } from "react-icons/ci";
 import { AiOutlineDelete } from "react-icons/ai";
 import MyTooltip from "@/myComponents/MyTooltip";
+import { useNavigate } from "react-router-dom";
 
 export default function ViewProductsTable({
   products = [],
   setOpenDialog,
   setCurrentProduct,
 }) {
+  const navigate = useNavigate();
   return (
     <Table>
       <TableHeader>
@@ -42,7 +44,7 @@ export default function ViewProductsTable({
       <TableBody>
         {products.map((product) => {
           return (
-            <TableRow key={product.id}>
+            <TableRow key={product.firestoreId}>
               <TableCell>
                 <Checkbox />
               </TableCell>
@@ -73,6 +75,9 @@ export default function ViewProductsTable({
                     <IconButton
                       icon={<CiEdit />}
                       className="bg-primary-red/20 text-primary-red hover:bg-primary-red"
+                      onClick={() => {
+                        navigate(`/editProduct/${product.firestoreId}`);
+                      }}
                     />
                   </MyTooltip>
                   <MyTooltip text="Delete Product">
