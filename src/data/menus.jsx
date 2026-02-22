@@ -17,13 +17,12 @@ export const menuItems = [
     items: [
       { title: "Create", path: "/addProduct" },
       { title: "View Products", path: "/products" },
-      { title: "Orders", path: "/orders" },
     ],
   },
   {
     section: "Category",
     icon: MdCategory,
-    items: [{ title: "Reports", path: "/reports" }],
+    items: [{ title: "Create", path: "/addCategory" }],
   },
   {
     section: "inventory",

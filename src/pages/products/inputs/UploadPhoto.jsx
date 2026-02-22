@@ -4,13 +4,21 @@ import { useDropzone } from "react-dropzone";
 import { Button } from "@/components/ui/button";
 import { CloudUpload } from "lucide-react";
 
-export default function UploadPhoto({ maxFiles = 5, dispatch, images = [] }) {
+export default function UploadPhoto({
+  maxFiles = 5,
+  dispatch,
+  images = [],
+  cardTitle,
+}) {
   const [files, setFiles] = useState([]);
   const initialized = useRef(false); // ✅ لتأكد أننا نعين الصور القديمة مرة واحدة فقط
 
   // تحويل الصور القديمة إلى نفس structure مرة واحدة فقط
   useEffect(() => {
     if (!images || images.length === 0) return;
+    const setFilesFunction = (images) => {
+      setFiles(images);
+    };
 
     if (!initialized.current) {
       const mappedImages = images.map((url) => ({
@@ -20,7 +28,7 @@ export default function UploadPhoto({ maxFiles = 5, dispatch, images = [] }) {
         existing: true,
       }));
 
-      setFiles(mappedImages);
+      setFilesFunction(mappedImages);
       initialized.current = true; // ✅ بعد هذه المرة لن يعاد التعيين
     }
   }, [images]);
@@ -83,7 +91,7 @@ export default function UploadPhoto({ maxFiles = 5, dispatch, images = [] }) {
   return (
     <Card className="font-hanken text-gray-700 dark:text-gray-300 text-lg dark:bg-primary-black">
       <CardHeader>
-        <CardTitle>Add Product Photo</CardTitle>
+        <CardTitle>{cardTitle}</CardTitle>
         <hr />
       </CardHeader>
 

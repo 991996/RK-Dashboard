@@ -1,4 +1,5 @@
 import App from "@/App";
+import AddCategory from "@/pages/category/mainPages/AddCategory";
 import Dashboard from "@/pages/dashboard/Dashboard";
 import NotFound404 from "@/pages/NotFound404";
 import AddedSuccessfully from "@/pages/products/mainPages/AddedSuccessfully";
@@ -16,7 +17,7 @@ const router = createBrowserRouter([
         index: true,
         element: <Dashboard />,
         handle: { pageTitle: "Dashboard", navActive: "dashboard" },
-      },
+      }, // Products
       {
         path: "/addProduct",
         element: <AddProduct />,
@@ -36,6 +37,11 @@ const router = createBrowserRouter([
         path: "/editProduct/:productId",
         element: <EditProduct />,
         handle: { pageTitle: "Edit Product", navActive: "products" },
+      }, // Category
+      {
+        path: "/addCategory",
+        element: <AddCategory />,
+        handle: { pageTitle: "Create Category", navActive: "category" },
       },
       {
         path: "*",

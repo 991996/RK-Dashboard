@@ -58,7 +58,7 @@ export default function AddProduct() {
         </div>
       </div>
       <div className="col-span-3 flex flex-col gap-4 order-1 xl:order-2">
-        <UploadPhoto dispatch={dispatch} />
+        <UploadPhoto dispatch={dispatch} cardTitle="Add Product Photo" />
         <ProductInfoForm product={product} dispatch={dispatch} />
         <PricingDetails product={product} dispatch={dispatch} />
       </div>

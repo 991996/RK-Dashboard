@@ -10,16 +10,26 @@ import {
 export default function ImagesCarousel({ images = [] }) {
   const [api, setApi] = useState(null);
   const [current, setCurrent] = useState(1);
+  console.log(images);
 
   useEffect(() => {
-    if (!api || !images.length) return;
+    if (!api) return;
 
-    setCurrent(api.selectedScrollSnap() + 1);
-
-    api.on("select", () => {
+    const handleSelect = () => {
       setCurrent(api.selectedScrollSnap() + 1);
-    });
-  }, [api, images]);
+    };
+
+    handleSelect();
+
+    api.on("select", handleSelect);
+
+    return () => api.off("select", handleSelect);
+  }, [api]);
+
+  const getPreview = (file) => {
+    if (typeof file === "string") return file;
+    return file.preview;
+  };
 
   // fallback إذا لا يوجد صور
   if (!images.length) {
@@ -38,7 +48,7 @@ export default function ImagesCarousel({ images = [] }) {
             <CarouselItem key={index}>
               <div className="w-full aspect-square bg-gray-200 rounded-lg">
                 <img
-                  src={img}
+                  src={getPreview(img)}
                   alt={`product-${index}`}
                   className="w-full h-full object-cover rounded-lg"
                 />
@@ -47,14 +57,20 @@ export default function ImagesCarousel({ images = [] }) {
           ))}
         </CarouselContent>
 
-        <CarouselPrevious />
-        <CarouselNext />
+        {images.length > 1 ? (
+          <>
+            <CarouselPrevious />
+            <CarouselNext />
+          </>
+        ) : null}
       </Carousel>
 
       {/* indicator */}
-      <div className="text-center text-sm text-gray-500 mt-2">
-        {current} / {images.length}
-      </div>
+      {images.length > 1 ? (
+        <div className="text-center text-sm text-gray-500 mt-2">
+          {current} / {images.length}
+        </div>
+      ) : null}
     </div>
   );
 }
