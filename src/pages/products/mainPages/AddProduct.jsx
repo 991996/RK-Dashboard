@@ -4,45 +4,32 @@ import { ProductInfoForm } from "../cards/ProductInfoForm";
 import UploadPhoto from "../inputs/UploadPhoto";
 import PrimaryButton from "@/myComponents/PrimaryButton";
 import OutlineButton from "@/myComponents/OutlineButton";
-import { useReducer, useState } from "react";
+import { useReducer } from "react";
 import productReducer from "@/reducers/productReducer";
 import { createProduct } from "@/services/productService";
 import UploadLoader from "@/myComponents/UploadLoader";
 import { Link, useNavigate } from "react-router-dom";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { productInitialState } from "@/reducers/productInitialState";
 
 export default function AddProduct() {
-  const initialState = {
-    name: "",
-    images: [],
-    category: "",
-    brand: "",
-    weight: "",
-    sizes: [],
-    colors: [],
-    description: "",
-    tagNumber: "",
-    stock: 0,
-    tags: [],
-    price: 0.0,
-    discount: 0.0,
-    tax: 0.0,
-    createdAt: null,
-  };
-  const [product, dispatch] = useReducer(productReducer, initialState);
-  const [loading, setLoading] = useState(false);
+  const queryClient = useQueryClient();
+  const [product, dispatch] = useReducer(productReducer, productInitialState);
   const navigate = useNavigate();
+
+  const mutation = useMutation({
+    mutationFn: createProduct,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["products"]);
+      navigate("/added_successfully");
+    },
+  });
 
   // save the product
   const handleSave = async () => {
-    setLoading(true);
-    try {
-      await createProduct(product);
-      navigate("/added_successfully");
-    } catch (error) {
-      console.error(error);
-    }
+    mutation.mutate(product);
   };
-  if (loading) return <UploadLoader />;
+  if (mutation.isLoading) return <UploadLoader />;
   return (
     <div
       className="grid grid-cols-1 

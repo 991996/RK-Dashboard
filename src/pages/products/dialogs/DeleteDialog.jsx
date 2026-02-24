@@ -14,18 +14,24 @@ import { AlertTriangleIcon } from "lucide-react";
 import ProductItem from "../ProductItem";
 import { deleteProduct } from "@/services/productService";
 import { toast } from "sonner";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-export default function DeleteDialog({ open, setOpen, product, setProducts }) {
-  const handleDelete = async () => {
-    setProducts((prev) => prev.filter((p) => p.id !== product.id));
-    try {
-      await deleteProduct(product.id);
+export default function DeleteDialog({ open, setOpen, product }) {
+  const queryClient = useQueryClient();
+  const deleteMutation = useMutation({
+    mutationFn: deleteProduct,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["products"]);
       toast.success("Product has been deleted", { position: "top-center" });
-    } catch (error) {
-      setProducts((prev) => [...prev, product]);
+    },
+    onError: (error) => {
       toast.error("Product has not been deleted", { position: "top-center" });
       console.log("ERROR", error);
-    }
+    },
+  });
+  const handleDelete = () => {
+    console.log(product);
+    deleteMutation.mutate(product.firestoreId);
   };
   return (
     <Dialog open={open} onOpenChange={setOpen}>

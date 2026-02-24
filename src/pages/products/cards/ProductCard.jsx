@@ -19,7 +19,7 @@ export default function ProductCard({ product }) {
         <div className="flex flex-col gap-4">
           {/* Product image */}
 
-          <ImagesCarousel images={product.images} />
+          <ImagesCarousel images={product?.images} />
 
           {/* product name */}
           <div className="flex flex-wrap items-center gap-1">

@@ -44,7 +44,7 @@ export function ProductInfoForm({ product, dispatch }) {
                     id="name"
                     placeholder="Item's Name"
                     required
-                    value={product.name}
+                    value={product?.name}
                     onChange={(event) =>
                       dispatch({
                         type: "UPDATE_FIELD",
@@ -57,7 +57,7 @@ export function ProductInfoForm({ product, dispatch }) {
                 <Field>
                   <FieldLabel htmlFor="category">Category</FieldLabel>
                   <Select
-                    defaultValue={product.category}
+                    defaultValue={product?.category}
                     onValueChange={(value) =>
                       dispatch({
                         type: "UPDATE_FIELD",
@@ -90,7 +90,7 @@ export function ProductInfoForm({ product, dispatch }) {
                     id="brand"
                     placeholder="Brand Name"
                     required
-                    value={product.brand}
+                    value={product?.brand}
                     onChange={(event) =>
                       dispatch({
                         type: "UPDATE_FIELD",
@@ -106,7 +106,7 @@ export function ProductInfoForm({ product, dispatch }) {
                     id="weight"
                     placeholder="In kg"
                     required
-                    value={product.weight}
+                    value={product?.weight}
                     onChange={(event) =>
                       dispatch({
                         type: "UPDATE_FIELD",
@@ -143,7 +143,7 @@ export function ProductInfoForm({ product, dispatch }) {
                   id="description"
                   placeholder="Short description about the product"
                   className="resize-none"
-                  value={product.description}
+                  value={product?.description}
                   onChange={(event) =>
                     dispatch({
                       type: "UPDATE_FIELD",
@@ -161,7 +161,7 @@ export function ProductInfoForm({ product, dispatch }) {
                     id="tagNumber"
                     placeholder="#******"
                     type="number"
-                    value={product.tagNumber}
+                    value={product?.tagNumber}
                     onChange={(event) =>
                       dispatch({
                         type: "UPDATE_FIELD",
@@ -178,7 +178,7 @@ export function ProductInfoForm({ product, dispatch }) {
                     placeholder="Quantity"
                     type="number"
                     required
-                    value={product.stock}
+                    value={product?.stock}
                     onChange={(event) =>
                       dispatch({
                         type: "UPDATE_FIELD",

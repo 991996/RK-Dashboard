@@ -1,0 +1,17 @@
+export const productInitialState = {
+  name: "",
+  images: [],
+  category: "",
+  brand: "",
+  weight: "",
+  sizes: [],
+  colors: [],
+  description: "",
+  tagNumber: "",
+  stock: 0,
+  tags: [],
+  price: 0.0,
+  discount: 0.0,
+  tax: 0.0,
+  createdAt: null,
+};

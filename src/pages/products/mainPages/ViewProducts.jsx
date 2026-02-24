@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import PrimaryButton from "@/myComponents/PrimaryButton";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { fetchProducts } from "@/services/productService";
 import TableLoader from "@/myComponents/TableLoader";
 import {
@@ -23,26 +23,20 @@ import PaginationComponent from "../Pagination";
 import { Separator } from "@/components/ui/separator";
 import ViewProductsTable from "../ViewProductsTable";
 import DeleteDialog from "../dialogs/DeleteDialog";
+import { useQuery } from "@tanstack/react-query";
 
 export default function ViewProducts() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [openDialog, setOpenDialog] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(null);
-
-  useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const data = await fetchProducts();
-        setProducts(data);
-      } catch (error) {
-        console.log("Error while get the products: ", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    getProducts();
-  }, []);
+  const {
+    data: products,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["products"],
+    queryFn: fetchProducts,
+  });
+  if (error) return <div>Error...!</div>;
   return (
     <>
       <Card className="mb-10">
@@ -72,7 +66,7 @@ export default function ViewProducts() {
 
         <CardContent>
           {/* Products table */}
-          {loading ? (
+          {isLoading ? (
             <div className=" h-[50vh] flex justify-center items-center">
               <TableLoader />
             </div>
@@ -94,7 +88,6 @@ export default function ViewProducts() {
         open={openDialog}
         setOpen={setOpenDialog}
         product={currentProduct}
-        setProducts={setProducts}
       />
     </>
   );

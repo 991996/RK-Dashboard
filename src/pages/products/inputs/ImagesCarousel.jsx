@@ -10,7 +10,6 @@ import {
 export default function ImagesCarousel({ images = [] }) {
   const [api, setApi] = useState(null);
   const [current, setCurrent] = useState(1);
-  console.log(images);
 
   useEffect(() => {
     if (!api) return;

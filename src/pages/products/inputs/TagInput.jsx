@@ -11,7 +11,7 @@ import { Separator } from "@/components/ui/separator";
 export default function TagInput({ product, dispatch }) {
   const inputRef = useRef(null);
 
-  const tags = product.tags || [];
+  const tags = product?.tags || [];
 
   const [inputValue, setInputValue] = useState("");
   const [isOpen, setIsOpen] = useState(false);

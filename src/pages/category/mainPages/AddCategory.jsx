@@ -5,13 +5,14 @@ import { Link } from "react-router-dom";
 import { useReducer } from "react";
 import categoryReducer from "@/reducers/categoryReducer";
 import CategoryCard from "../cards/CategoryCard";
+import { CategoryInfoForm } from "../cards/CategoryInfoForm";
 
 export default function AddCategory() {
   const initialState = {
     title: "",
     createdBy: "Seller",
     stock: 10,
-    tagId: 0,
+    tagId: "",
     images: [],
     description: "",
   };
@@ -36,6 +37,7 @@ export default function AddCategory() {
           dispatch={dispatch}
           cardTitle="Add Thumbnail Photo"
         />
+        <CategoryInfoForm category={category} dispatch={dispatch} />
       </div>
     </div>
   );

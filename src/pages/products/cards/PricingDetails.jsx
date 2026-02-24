@@ -38,7 +38,7 @@ export function PricingDetails({ product, dispatch }) {
                       placeholder="0.00"
                       type="number"
                       required
-                      value={product.price}
+                      value={product?.price}
                       onChange={(event) =>
                         dispatch({
                           type: "UPDATE_FIELD",
@@ -62,7 +62,7 @@ export function PricingDetails({ product, dispatch }) {
                       id="discount"
                       placeholder="0.00"
                       type="number"
-                      value={product.discount}
+                      value={product?.discount}
                       onChange={(event) =>
                         dispatch({
                           type: "UPDATE_FIELD",
@@ -86,7 +86,7 @@ export function PricingDetails({ product, dispatch }) {
                       id="tax"
                       placeholder="0.00"
                       type="number"
-                      value={product.tax}
+                      value={product?.tax}
                       onChange={(event) =>
                         dispatch({
                           type: "UPDATE_FIELD",
