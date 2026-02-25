@@ -9,11 +9,11 @@ import {
 import ProductItem from "./ProductItem";
 import { Checkbox } from "@/components/ui/checkbox";
 import { FaStar } from "react-icons/fa6";
-import IconButton from "@/myComponents/IconButton";
+import IconButton from "@/components/myComponents/IconButton";
 import { IoEyeOutline } from "react-icons/io5";
 import { CiEdit } from "react-icons/ci";
 import { AiOutlineDelete } from "react-icons/ai";
-import MyTooltip from "@/myComponents/MyTooltip";
+import MyTooltip from "@/components/myComponents/MyTooltip";
 import { useNavigate } from "react-router-dom";
 
 export default function ViewProductsTable({

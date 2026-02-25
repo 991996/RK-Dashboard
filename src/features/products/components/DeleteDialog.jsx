@@ -7,30 +7,30 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import OutlineButton from "@/myComponents/OutlineButton";
-import PrimaryButton from "@/myComponents/PrimaryButton";
+import OutlineButton from "@/components/myComponents/OutlineButton";
+import PrimaryButton from "@/components/myComponents/PrimaryButton";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertTriangleIcon } from "lucide-react";
+import ProductItem from "../ProductItem";
+import { deleteProduct } from "@/features/products/productService";
 import { toast } from "sonner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteCategory } from "@/services/categoryService";
-import CategoryItem from "./CategoryItem";
 
-export default function DeleteDialog({ open, setOpen, category }) {
+export default function DeleteDialog({ open, setOpen, product }) {
   const queryClient = useQueryClient();
   const deleteMutation = useMutation({
-    mutationFn: deleteCategory,
+    mutationFn: deleteProduct,
     onSuccess: () => {
-      queryClient.invalidateQueries(["categories"]);
-      toast.success("Category has been deleted", { position: "top-center" });
+      queryClient.invalidateQueries(["products"]);
+      toast.success("Product has been deleted", { position: "top-center" });
     },
     onError: (error) => {
-      toast.error("Category has not been deleted", { position: "top-center" });
+      toast.error("Product has not been deleted", { position: "top-center" });
       console.log("ERROR", error);
     },
   });
   const handleDelete = () => {
-    deleteMutation.mutate(category.firestoreId);
+    deleteMutation.mutate(product.firestoreId);
   };
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -38,14 +38,14 @@ export default function DeleteDialog({ open, setOpen, category }) {
         <DialogHeader>
           <DialogTitle>
             <div className="flex flex-col gap-4">
-              <p>Are you sure you want to delete this category?</p>
+              <p>Are you sure you want to delete this product?</p>
               <Alert className="max-w-md border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-900 dark:bg-amber-950 dark:text-amber-50">
                 <AlertTriangleIcon />
 
-                <AlertTitle>Delete Category Warning</AlertTitle>
+                <AlertTitle>Delete Product Warning</AlertTitle>
 
                 <AlertDescription>
-                  This action will permanently delete this category from your
+                  This action will permanently delete this product from your
                   store. This cannot be undone. Please confirm that you want to
                   continue.
                 </AlertDescription>
@@ -55,7 +55,7 @@ export default function DeleteDialog({ open, setOpen, category }) {
           <DialogDescription></DialogDescription>
         </DialogHeader>
 
-        <CategoryItem category={category} />
+        <ProductItem product={product} />
 
         <DialogFooter>
           <DialogClose asChild>

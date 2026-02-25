@@ -1,17 +1,17 @@
-import UploadPhoto from "@/pages/products/inputs/UploadPhoto";
-import PrimaryButton from "@/myComponents/PrimaryButton";
-import OutlineButton from "@/myComponents/OutlineButton";
+import UploadPhoto from "@/features/products/components/inputs/UploadPhoto";
+import PrimaryButton from "@/components/myComponents/PrimaryButton";
+import OutlineButton from "@/components/myComponents/OutlineButton";
 import { useEffect, useReducer } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import TableLoader from "@/myComponents/TableLoader";
+import TableLoader from "@/components/myComponents/TableLoader";
 import { toast } from "sonner";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { categoryInitialState } from "@/reducers/initialState";
-import categoryReducer from "@/reducers/categoryReducer";
-import { updateCategory } from "@/services/categoryService";
-import { fetchCategory } from "@/services/categoryService";
-import CategoryCard from "../cards/CategoryCard";
-import { CategoryInfoForm } from "../cards/CategoryInfoForm";
+import { categoryInitialState } from "@/data/initialState";
+import categoryReducer from "@/features/categories/reducer/categoryReducer";
+import { updateCategory } from "@/features/categories/categoryService";
+import { fetchCategory } from "@/features/categories/categoryService";
+import CategoryCard from "../components/CategoryCard";
+import { CategoryInfoForm } from "../components/CategoryInfoForm";
 
 export default function EditCategory() {
   const { categoryId } = useParams();

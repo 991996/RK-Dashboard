@@ -1,14 +1,14 @@
-import UploadPhoto from "@/pages/products/inputs/UploadPhoto";
-import PrimaryButton from "@/myComponents/PrimaryButton";
-import OutlineButton from "@/myComponents/OutlineButton";
+import UploadPhoto from "@/features/products/components/inputs/UploadPhoto";
+import PrimaryButton from "@/components/myComponents/PrimaryButton";
+import OutlineButton from "@/components/myComponents/OutlineButton";
 import { Link, useNavigate } from "react-router-dom";
 import { useReducer } from "react";
-import categoryReducer from "@/reducers/categoryReducer";
-import CategoryCard from "../cards/CategoryCard";
-import { CategoryInfoForm } from "../cards/CategoryInfoForm";
-import { categoryInitialState } from "@/reducers/initialState";
+import categoryReducer from "@/features/categories/reducer/categoryReducer";
+import CategoryCard from "../components/CategoryCard";
+import { CategoryInfoForm } from "../components/CategoryInfoForm";
+import { categoryInitialState } from "@/data/initialState";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createCategory } from "@/services/categoryService";
+import { createCategory } from "@/features/categories/categoryService";
 
 export default function AddCategory() {
   const queryClient = useQueryClient();

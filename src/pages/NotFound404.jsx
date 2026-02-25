@@ -1,5 +1,5 @@
 import image from "@/assets/404 1.png";
-import PrimaryButton from "@/myComponents/PrimaryButton";
+import PrimaryButton from "@/components/myComponents/PrimaryButton";
 import { Link } from "react-router-dom";
 
 export default function NotFound404() {

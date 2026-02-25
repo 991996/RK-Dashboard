@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import ImagesCarousel from "@/pages/products/inputs/ImagesCarousel";
+import ImagesCarousel from "@/features/products/components/inputs/ImagesCarousel";
 
 export default function CategoryCard({ category }) {
   return (

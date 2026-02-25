@@ -1,5 +1,5 @@
 import { menuItems } from "@/data/menus";
-import Logo from "@/myComponents/Logo";
+import Logo from "@/components/myComponents/Logo";
 import {
   Accordion,
   AccordionContent,

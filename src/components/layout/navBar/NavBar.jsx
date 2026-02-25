@@ -6,7 +6,7 @@ import Profile from "./Profile";
 import SearchBar from "./SearchBar";
 import { Logs } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import SideBar from "@/sideBar/SideBar";
+import SideBar from "@/components/layout/sideBar/SideBar";
 
 export default function NavBar({ pageTitle = "Dashboard" }) {
   return (

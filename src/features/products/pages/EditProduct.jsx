@@ -1,17 +1,20 @@
-import { PricingDetails } from "../cards/PricingDetails";
-import ProductCard from "../cards/ProductCard";
+import { PricingDetails } from "../components/PricingDetails";
+import ProductCard from "../components/ProductCard";
 import { ProductInfoForm } from "../cards/ProductInfoForm";
-import UploadPhoto from "../inputs/UploadPhoto";
-import PrimaryButton from "@/myComponents/PrimaryButton";
-import OutlineButton from "@/myComponents/OutlineButton";
+import UploadPhoto from "../components/inputs/UploadPhoto";
+import PrimaryButton from "@/components/myComponents/PrimaryButton";
+import OutlineButton from "@/components/myComponents/OutlineButton";
 import { useEffect, useReducer } from "react";
-import { fetchProduct, updateProduct } from "@/services/productService";
+import {
+  fetchProduct,
+  updateProduct,
+} from "@/features/products/productService";
 import { useNavigate, useParams } from "react-router-dom";
-import TableLoader from "@/myComponents/TableLoader";
-import productReducer from "@/reducers/productReducer";
+import TableLoader from "@/components/myComponents/TableLoader";
+import productReducer from "@/features/products/reducer/productReducer";
 import { toast } from "sonner";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { productInitialState } from "@/reducers/initialState";
+import { productInitialState } from "@/data/initialState";
 
 export default function EditProduct() {
   const { productId } = useParams();

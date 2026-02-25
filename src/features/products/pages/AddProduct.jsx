@@ -1,16 +1,16 @@
-import { PricingDetails } from "../cards/PricingDetails";
-import ProductCard from "../cards/ProductCard";
+import { PricingDetails } from "../components/PricingDetails";
+import ProductCard from "../components/ProductCard";
 import { ProductInfoForm } from "../cards/ProductInfoForm";
-import UploadPhoto from "../inputs/UploadPhoto";
-import PrimaryButton from "@/myComponents/PrimaryButton";
-import OutlineButton from "@/myComponents/OutlineButton";
+import UploadPhoto from "../components/inputs/UploadPhoto";
+import PrimaryButton from "@/components/myComponents/PrimaryButton";
+import OutlineButton from "@/components/myComponents/OutlineButton";
 import { useReducer } from "react";
-import productReducer from "@/reducers/productReducer";
-import { createProduct } from "@/services/productService";
-import UploadLoader from "@/myComponents/UploadLoader";
+import productReducer from "@/features/products/reducer/productReducer";
+import { createProduct } from "@/features/products/productService";
+import UploadLoader from "@/components/myComponents/UploadLoader";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { productInitialState } from "@/reducers/initialState";
+import { productInitialState } from "@/data/initialState";
 
 export default function AddProduct() {
   const queryClient = useQueryClient();

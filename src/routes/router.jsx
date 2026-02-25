@@ -1,13 +1,13 @@
 import App from "@/App";
-import AddCategory from "@/pages/category/mainPages/AddCategory";
-import EditCategory from "@/pages/category/mainPages/EditCategory";
-import ViewCategories from "@/pages/category/mainPages/ViewCategories";
-import Dashboard from "@/pages/dashboard/Dashboard";
+import AddCategory from "@/features/categories/pages/AddCategory";
+import EditCategory from "@/features/categories/pages/EditCategory";
+import ViewCategories from "@/features/categories/pages/ViewCategories";
+import Dashboard from "@/pages/Dashboard";
 import NotFound404 from "@/pages/NotFound404";
-import AddedSuccessfully from "@/pages/products/mainPages/AddedSuccessfully";
-import AddProduct from "@/pages/products/mainPages/AddProduct";
-import EditProduct from "@/pages/products/mainPages/EditProduct";
-import ViewProducts from "@/pages/products/mainPages/ViewProducts";
+import AddedSuccessfully from "@/features/products/pages/AddedSuccessfully";
+import AddProduct from "@/features/products/pages/AddProduct";
+import EditProduct from "@/features/products/pages/EditProduct";
+import ViewProducts from "@/features/products/pages/ViewProducts";
 import { createBrowserRouter } from "react-router-dom";
 
 const router = createBrowserRouter([

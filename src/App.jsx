@@ -1,7 +1,7 @@
 import { Outlet, useMatches } from "react-router-dom";
 import "./App.css";
-import SideBar from "./sideBar/SideBar";
-import NavBar from "./navBar/NavBar";
+import SideBar from "./components/layout/sideBar/SideBar";
+import NavBar from "./components/layout/navBar/NavBar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
 function App() {

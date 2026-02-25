@@ -6,35 +6,34 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import PrimaryButton from "@/myComponents/PrimaryButton";
+import PrimaryButton from "@/components/myComponents/PrimaryButton";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { fetchProducts } from "@/services/productService";
-import TableLoader from "@/myComponents/TableLoader";
+import TableLoader from "@/components/myComponents/TableLoader";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import OutlineButton from "@/myComponents/OutlineButton";
+import OutlineButton from "@/components/myComponents/OutlineButton";
 import { ChevronDown, Star, StarIcon } from "lucide-react";
-import PaginationComponent from "../Pagination";
 import { Separator } from "@/components/ui/separator";
-import ViewProductsTable from "../ViewProductsTable";
-import DeleteDialog from "../dialogs/DeleteDialog";
+import DeleteDialog from "../../../pages/category/DeleteDialog";
 import { useQuery } from "@tanstack/react-query";
+import { fetchCategories } from "@/features/categories/categoryService";
+import ViewCategoriesTable from "../../../pages/category/ViewCategoriesTable";
 
-export default function ViewProducts() {
+export default function ViewCategories() {
   const [openDialog, setOpenDialog] = useState(false);
-  const [currentProduct, setCurrentProduct] = useState(null);
+  const [currentCategory, setCurrentCategory] = useState(null);
   const {
-    data: products,
+    data: categories,
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["products"],
-    queryFn: fetchProducts,
+    queryKey: ["categories"],
+    queryFn: fetchCategories,
   });
   if (error) return <div>Error...!</div>;
   return (
@@ -42,13 +41,13 @@ export default function ViewProducts() {
       <Card className="mb-10">
         <CardHeader>
           <CardTitle className="font-hanken text-gray-700">
-            All Products List
+            All Categories List
           </CardTitle>
 
           <CardAction className="flex gap-1">
-            {/* Add product button */}
-            <Link to="/addProduct">
-              <PrimaryButton text="Add Product" />
+            {/* Add Category button */}
+            <Link to="/addCategory">
+              <PrimaryButton text="Add Category" />
             </Link>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -65,29 +64,27 @@ export default function ViewProducts() {
         <hr />
 
         <CardContent>
-          {/* Products table */}
+          {/* categories table */}
           {isLoading ? (
             <div className=" h-[50vh] flex justify-center items-center">
               <TableLoader />
             </div>
           ) : (
-            <ViewProductsTable
-              products={products}
+            <ViewCategoriesTable
+              categories={categories}
               setOpenDialog={setOpenDialog}
-              setCurrentProduct={setCurrentProduct}
+              setCurrentCategory={setCurrentCategory}
             />
           )}
         </CardContent>
         <Separator />
-        <CardFooter>
-          <PaginationComponent />
-        </CardFooter>
+        <CardFooter>{/* <PaginationComponent /> */}</CardFooter>
       </Card>
       {/* Delete Dialog */}
       <DeleteDialog
         open={openDialog}
         setOpen={setOpenDialog}
-        product={currentProduct}
+        category={currentCategory}
       />
     </>
   );
