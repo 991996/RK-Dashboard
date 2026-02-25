@@ -10,7 +10,7 @@ import { createProduct } from "@/services/productService";
 import UploadLoader from "@/myComponents/UploadLoader";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { productInitialState } from "@/reducers/productInitialState";
+import { productInitialState } from "@/reducers/initialState";
 
 export default function AddProduct() {
   const queryClient = useQueryClient();

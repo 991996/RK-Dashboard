@@ -1,22 +1,33 @@
 import UploadPhoto from "@/pages/products/inputs/UploadPhoto";
 import PrimaryButton from "@/myComponents/PrimaryButton";
 import OutlineButton from "@/myComponents/OutlineButton";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useReducer } from "react";
 import categoryReducer from "@/reducers/categoryReducer";
 import CategoryCard from "../cards/CategoryCard";
 import { CategoryInfoForm } from "../cards/CategoryInfoForm";
+import { categoryInitialState } from "@/reducers/initialState";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { createCategory } from "@/services/categoryService";
 
 export default function AddCategory() {
-  const initialState = {
-    title: "",
-    createdBy: "Seller",
-    stock: 10,
-    tagId: "",
-    images: [],
-    description: "",
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const [category, dispatch] = useReducer(
+    categoryReducer,
+    categoryInitialState
+  );
+  const mutation = useMutation({
+    mutationFn: createCategory,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["categories"]);
+      navigate("/categories");
+    },
+  });
+  // Add function
+  const handleSave = async () => {
+    mutation.mutate(category);
   };
-  const [category, dispatch] = useReducer(categoryReducer, initialState);
   return (
     <div
       className="grid grid-cols-1 
@@ -25,7 +36,7 @@ export default function AddCategory() {
       <div className="flex flex-col  gap-4 col-span-1 order-2 xl:order-1">
         <CategoryCard category={category} />
         <div className="flex flex-col gap-3">
-          <PrimaryButton text="Submit" />
+          <PrimaryButton text="Submit" onClick={handleSave} />
           <Link to="/products" className="w-full cursor-pointer">
             <OutlineButton text="Cancel" className="w-full" />
           </Link>

@@ -22,7 +22,10 @@ export const menuItems = [
   {
     section: "Category",
     icon: MdCategory,
-    items: [{ title: "Create", path: "/addCategory" }],
+    items: [
+      { title: "Create", path: "/addCategory" },
+      { title: "View Categories", path: "/categories" },
+    ],
   },
   {
     section: "inventory",

@@ -1,5 +1,7 @@
 import App from "@/App";
 import AddCategory from "@/pages/category/mainPages/AddCategory";
+import EditCategory from "@/pages/category/mainPages/EditCategory";
+import ViewCategories from "@/pages/category/mainPages/ViewCategories";
 import Dashboard from "@/pages/dashboard/Dashboard";
 import NotFound404 from "@/pages/NotFound404";
 import AddedSuccessfully from "@/pages/products/mainPages/AddedSuccessfully";
@@ -42,6 +44,16 @@ const router = createBrowserRouter([
         path: "/addCategory",
         element: <AddCategory />,
         handle: { pageTitle: "Create Category", navActive: "category" },
+      },
+      {
+        path: "/categories",
+        element: <ViewCategories />,
+        handle: { pageTitle: "Categories", navActive: "category" },
+      },
+      {
+        path: "/editCategory/:categoryId",
+        element: <EditCategory />,
+        handle: { pageTitle: "Edit Category", navActive: "category" },
       },
       {
         path: "*",

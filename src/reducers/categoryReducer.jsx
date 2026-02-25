@@ -18,5 +18,10 @@ export default function categoryReducer(state, action) {
         images: [],
       };
     }
+    case "SET_CATEGORY": {
+      return action.payload;
+    }
+    default:
+      return state;
   }
 }

@@ -15,3 +15,13 @@ export const productInitialState = {
   tax: 0.0,
   createdAt: null,
 };
+
+export const categoryInitialState = {
+  title: "",
+  createdBy: "Seller",
+  stock: 10,
+  tagId: "",
+  images: [],
+  description: "",
+  createdAt: null,
+};
