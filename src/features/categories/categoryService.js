@@ -30,7 +30,7 @@ export const fetchCategories = async () => {
   try {
     const querySnapshot = await getDocs(collection(db, "categories"));
     const categoriesArray = querySnapshot.docs.map((doc) => ({
-      firestoreId: doc.id,
+      id: doc.id,
       ...doc.data(),
     }));
     return categoriesArray;
@@ -54,7 +54,7 @@ export const fetchCategory = async (id) => {
     if (!docSnap.exists()) return null;
 
     return {
-      firestoreId: docSnap.id,
+      id: docSnap.id,
       ...docSnap.data(),
     };
   } catch (error) {

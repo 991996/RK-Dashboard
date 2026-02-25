@@ -17,11 +17,13 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import TagInput from "../inputs/TagInput";
-import ColorInput from "../inputs/ColorInput";
-import SizeInput from "../inputs/SizeInput";
+import TagInput from "./inputs/TagInput";
+import ColorInput from "./inputs/ColorInput";
+import SizeInput from "./inputs/SizeInput";
+import { useCategories } from "@/features/categories/categoryQueries";
 
 export function ProductInfoForm({ product, dispatch }) {
+  const { data: categories } = useCategories();
   return (
     <Card
       className="text-gray-500 dark:text-gray-300 text-lg
@@ -57,7 +59,7 @@ export function ProductInfoForm({ product, dispatch }) {
                 <Field>
                   <FieldLabel htmlFor="category">Category</FieldLabel>
                   <Select
-                    defaultValue={product?.category}
+                    value={product?.category}
                     onValueChange={(value) =>
                       dispatch({
                         type: "UPDATE_FIELD",
@@ -71,13 +73,13 @@ export function ProductInfoForm({ product, dispatch }) {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
-                        <SelectItem value="women clothes">
-                          Women Clothes
-                        </SelectItem>
-                        <SelectItem value="men clothes">Men Clothes</SelectItem>
-                        <SelectItem value="kids clothes">
-                          Kids Clothes
-                        </SelectItem>
+                        {categories?.map((category) => {
+                          return (
+                            <SelectItem key={category.id} value={category.id}>
+                              {category.title}
+                            </SelectItem>
+                          );
+                        })}
                       </SelectGroup>
                     </SelectContent>
                   </Select>

@@ -7,14 +7,13 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Checkbox } from "@/components/ui/checkbox";
-import { FaStar } from "react-icons/fa6";
 import IconButton from "@/components/myComponents/IconButton";
 import { IoEyeOutline } from "react-icons/io5";
 import { CiEdit } from "react-icons/ci";
 import { AiOutlineDelete } from "react-icons/ai";
 import MyTooltip from "@/components/myComponents/MyTooltip";
 import { useNavigate } from "react-router-dom";
-import CategoryItem from "../../features/categories/components/CategoryItem";
+import CategoryItem from "./CategoryItem";
 
 export default function ViewCategoriesTable({
   categories = [],

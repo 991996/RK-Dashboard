@@ -1,4 +1,4 @@
-import "@/myComponents/loader.css";
+import "./loader.css";
 
 export default function TableLoader() {
   return <span className="table-loader"></span>;

@@ -4,11 +4,14 @@ import { Button } from "@/components/ui/button";
 import { colorClasses } from "@/data/productList";
 import ImagesCarousel from "./inputs/ImagesCarousel";
 import { Separator } from "@/components/ui/separator";
+import { useCategory } from "@/features/categories/categoryQueries";
 
 export default function ProductCard({ product }) {
   const price = Number(product?.price) || 0;
   const discount = Number(product?.discount) || 0;
   const discountedPrice = price * (1 - discount / 100);
+
+  const { data: category } = useCategory(product.category);
 
   return (
     <Card
@@ -27,7 +30,7 @@ export default function ProductCard({ product }) {
               {product?.name || "Product Name"}
             </h1>
             <p className="text-sm capitalize">
-              ({product?.category !== "" ? product?.category : "Category"})
+              ({category?.title !== "" ? category?.title : "Category"})
             </p>
           </div>
           {/* price */}

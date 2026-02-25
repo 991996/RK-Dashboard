@@ -19,22 +19,15 @@ import {
 import OutlineButton from "@/components/myComponents/OutlineButton";
 import { ChevronDown, Star, StarIcon } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
-import DeleteDialog from "../../../pages/category/DeleteDialog";
-import { useQuery } from "@tanstack/react-query";
-import { fetchCategories } from "@/features/categories/categoryService";
-import ViewCategoriesTable from "../../../pages/category/ViewCategoriesTable";
+import DeleteDialog from "../components/DeleteCategoryDialog";
+import ViewCategoriesTable from "../components/ViewCategoriesTable";
+import PaginationComponent from "@/components/myComponents/TablePagination";
+import { useCategories } from "../categoryQueries";
 
 export default function ViewCategories() {
   const [openDialog, setOpenDialog] = useState(false);
   const [currentCategory, setCurrentCategory] = useState(null);
-  const {
-    data: categories,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ["categories"],
-    queryFn: fetchCategories,
-  });
+  const { data: categories, isLoading, error } = useCategories();
   if (error) return <div>Error...!</div>;
   return (
     <>
@@ -78,7 +71,9 @@ export default function ViewCategories() {
           )}
         </CardContent>
         <Separator />
-        <CardFooter>{/* <PaginationComponent /> */}</CardFooter>
+        <CardFooter>
+          <PaginationComponent />
+        </CardFooter>
       </Card>
       {/* Delete Dialog */}
       <DeleteDialog

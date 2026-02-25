@@ -5,13 +5,11 @@ import { useEffect, useReducer } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import TableLoader from "@/components/myComponents/TableLoader";
 import { toast } from "sonner";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { categoryInitialState } from "@/data/initialState";
 import categoryReducer from "@/features/categories/reducer/categoryReducer";
-import { updateCategory } from "@/features/categories/categoryService";
-import { fetchCategory } from "@/features/categories/categoryService";
 import CategoryCard from "../components/CategoryCard";
 import { CategoryInfoForm } from "../components/CategoryInfoForm";
+import { useCategory, useUpdateCategory } from "../categoryQueries";
 
 export default function EditCategory() {
   const { categoryId } = useParams();
@@ -20,22 +18,10 @@ export default function EditCategory() {
     categoryInitialState
   );
   const navigate = useNavigate();
-
-  const queryClient = useQueryClient();
-  const updateMutation = useMutation({
-    mutationFn: ({ categoryId, category }) =>
-      updateCategory(categoryId, category),
-    onSuccess: () => {
-      queryClient.invalidateQueries(["categories"]);
-      toast.success("Category has been updated", { position: "top-center" });
-    },
-  });
+  const updateMutation = useUpdateCategory();
 
   //  Get the category
-  const { data, isLoading } = useQuery({
-    queryKey: ["category", categoryId],
-    queryFn: () => fetchCategory(categoryId),
-  });
+  const { data, isLoading } = useCategory(categoryId);
 
   // set the category to the view
   useEffect(() => {

@@ -6,28 +6,36 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import PrimaryButton from "@/components/myComponents/PrimaryButton";
+import PrimaryButton from "@/myComponents/PrimaryButton";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import TableLoader from "@/components/myComponents/TableLoader";
+import { fetchProducts } from "@/features/products/productService";
+import TableLoader from "@/myComponents/TableLoader";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import OutlineButton from "@/components/myComponents/OutlineButton";
+import OutlineButton from "@/myComponents/OutlineButton";
 import { ChevronDown, Star, StarIcon } from "lucide-react";
 import PaginationComponent from "../../../components/myComponents/TablePagination";
 import { Separator } from "@/components/ui/separator";
-import ViewProductsTable from "../components/ViewProductsTable";
-import DeleteDialog from "../components/DeleteProductDialog";
-import { useProducts } from "../productQueries";
+import ViewProductsTable from "../../../features/products/components/ViewProductsTable";
+import DeleteDialog from "../dialogs/DeleteDialog";
+import { useQuery } from "@tanstack/react-query";
 
 export default function ViewProducts() {
   const [openDialog, setOpenDialog] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(null);
-  const { data: products, isLoading, error } = useProducts();
+  const {
+    data: products,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["products"],
+    queryFn: fetchProducts,
+  });
   if (error) return <div>Error...!</div>;
   return (
     <>

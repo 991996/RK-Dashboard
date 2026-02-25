@@ -1,29 +1,20 @@
 import { PricingDetails } from "../components/PricingDetails";
 import ProductCard from "../components/ProductCard";
-import { ProductInfoForm } from "../cards/ProductInfoForm";
+import { ProductInfoForm } from "../components/ProductInfoForm";
 import UploadPhoto from "../components/inputs/UploadPhoto";
 import PrimaryButton from "@/components/myComponents/PrimaryButton";
 import OutlineButton from "@/components/myComponents/OutlineButton";
 import { useReducer } from "react";
 import productReducer from "@/features/products/reducer/productReducer";
-import { createProduct } from "@/features/products/productService";
 import UploadLoader from "@/components/myComponents/UploadLoader";
-import { Link, useNavigate } from "react-router-dom";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 import { productInitialState } from "@/data/initialState";
+import { useAddProduct } from "../productQueries";
 
 export default function AddProduct() {
-  const queryClient = useQueryClient();
   const [product, dispatch] = useReducer(productReducer, productInitialState);
-  const navigate = useNavigate();
 
-  const mutation = useMutation({
-    mutationFn: createProduct,
-    onSuccess: () => {
-      queryClient.invalidateQueries(["products"]);
-      navigate("/added_successfully");
-    },
-  });
+  const mutation = useAddProduct();
 
   // save the product
   const handleSave = async () => {
@@ -38,7 +29,11 @@ export default function AddProduct() {
       <div className="flex flex-col  gap-4 col-span-1 order-2 xl:order-1">
         <ProductCard product={product} />
         <div className="flex flex-col gap-3">
-          <PrimaryButton text="Submit" onClick={handleSave} />
+          <PrimaryButton
+            text={mutation.isPending ? "Saving..." : "Submit"}
+            onClick={handleSave}
+            disabled={mutation.isPending}
+          />
           <Link to="/products" className="w-full cursor-pointer">
             <OutlineButton text="Cancel" className="w-full" />
           </Link>

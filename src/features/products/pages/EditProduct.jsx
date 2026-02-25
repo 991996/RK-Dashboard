@@ -1,40 +1,25 @@
 import { PricingDetails } from "../components/PricingDetails";
 import ProductCard from "../components/ProductCard";
-import { ProductInfoForm } from "../cards/ProductInfoForm";
+import { ProductInfoForm } from "@/features/products/components/ProductInfoForm";
 import UploadPhoto from "../components/inputs/UploadPhoto";
 import PrimaryButton from "@/components/myComponents/PrimaryButton";
 import OutlineButton from "@/components/myComponents/OutlineButton";
 import { useEffect, useReducer } from "react";
-import {
-  fetchProduct,
-  updateProduct,
-} from "@/features/products/productService";
 import { useNavigate, useParams } from "react-router-dom";
 import TableLoader from "@/components/myComponents/TableLoader";
 import productReducer from "@/features/products/reducer/productReducer";
 import { toast } from "sonner";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { productInitialState } from "@/data/initialState";
+import { useProduct, useUpdateProduct } from "../productQueries";
 
 export default function EditProduct() {
   const { productId } = useParams();
   const [product, dispatch] = useReducer(productReducer, productInitialState);
   const navigate = useNavigate();
-
-  const queryClient = useQueryClient();
-  const updateMutation = useMutation({
-    mutationFn: ({ productId, product }) => updateProduct(productId, product),
-    onSuccess: () => {
-      queryClient.invalidateQueries(["products"]);
-      toast.success("Product has been updated", { position: "top-center" });
-    },
-  });
+  const updateMutation = useUpdateProduct();
 
   //  Get the Product
-  const { data, isLoading } = useQuery({
-    queryKey: ["product", productId],
-    queryFn: () => fetchProduct(productId),
-  });
+  const { data, isLoading } = useProduct(productId);
 
   // set the product to the view
   useEffect(() => {
