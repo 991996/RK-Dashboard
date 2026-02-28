@@ -23,11 +23,15 @@ import { Separator } from "@/components/ui/separator";
 import ViewProductsTable from "../components/ViewProductsTable";
 import DeleteDialog from "../components/DeleteProductDialog";
 import { useProducts } from "../productQueries";
+import TableShowSelect from "@/components/myComponents/TableShowSelect";
 
 export default function ViewProducts() {
   const [openDialog, setOpenDialog] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(null);
   const { data: products, isLoading, error } = useProducts();
+  // pagination
+  const [page, setPage] = useState(1);
+  const [show, setShow] = useState(10);
   if (error) return <div>Error...!</div>;
   return (
     <>
@@ -52,6 +56,7 @@ export default function ViewProducts() {
                 <DropdownMenuItem>Export</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
+            <TableShowSelect show={show} setShow={setShow} />
           </CardAction>
         </CardHeader>
         <hr />
@@ -64,7 +69,7 @@ export default function ViewProducts() {
             </div>
           ) : (
             <ViewProductsTable
-              products={products}
+              products={products.slice((page - 1) * show, page * show)}
               setOpenDialog={setOpenDialog}
               setCurrentProduct={setCurrentProduct}
             />
@@ -72,7 +77,12 @@ export default function ViewProducts() {
         </CardContent>
         <Separator />
         <CardFooter>
-          <PaginationComponent />
+          <PaginationComponent
+            totalItems={products?.length}
+            itemsPerPage={show}
+            currentPage={page}
+            onPageChange={setPage}
+          />
         </CardFooter>
       </Card>
       {/* Delete Dialog */}

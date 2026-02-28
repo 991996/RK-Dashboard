@@ -69,6 +69,9 @@ export default function ViewProductsTable({
                     <IconButton
                       icon={<IoEyeOutline />}
                       className="bg-gray-100 text-gray-500 hover:bg-gray-500"
+                      onClick={() => {
+                        navigate(`/viewProduct/${product.firestoreId}`);
+                      }}
                     />
                   </MyTooltip>
                   <MyTooltip text="Edit Product">

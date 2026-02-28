@@ -1,4 +1,4 @@
-import UploadPhoto from "@/features/products/components/inputs/UploadPhoto";
+import UploadPhoto from "@/components/myComponents/images/UploadPhoto";
 import PrimaryButton from "@/components/myComponents/PrimaryButton";
 import OutlineButton from "@/components/myComponents/OutlineButton";
 import { Link } from "react-router-dom";

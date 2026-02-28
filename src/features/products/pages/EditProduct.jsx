@@ -1,7 +1,7 @@
 import { PricingDetails } from "../components/PricingDetails";
 import ProductCard from "../components/ProductCard";
 import { ProductInfoForm } from "@/features/products/components/ProductInfoForm";
-import UploadPhoto from "../components/inputs/UploadPhoto";
+import UploadPhoto from "../../../components/myComponents/images/UploadPhoto";
 import PrimaryButton from "@/components/myComponents/PrimaryButton";
 import OutlineButton from "@/components/myComponents/OutlineButton";
 import { useEffect, useReducer } from "react";

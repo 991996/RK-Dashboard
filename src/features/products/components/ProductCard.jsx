@@ -2,7 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { colorClasses } from "@/data/productList";
-import ImagesCarousel from "./inputs/ImagesCarousel";
+import ImagesCarousel from "../../../components/myComponents/images/ImagesCarousel";
 import { Separator } from "@/components/ui/separator";
 import { useCategory } from "@/features/categories/categoryQueries";
 

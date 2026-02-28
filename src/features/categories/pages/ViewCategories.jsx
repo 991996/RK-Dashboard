@@ -23,11 +23,15 @@ import DeleteDialog from "../components/DeleteCategoryDialog";
 import ViewCategoriesTable from "../components/ViewCategoriesTable";
 import PaginationComponent from "@/components/myComponents/TablePagination";
 import { useCategories } from "../categoryQueries";
+import TableShowSelect from "@/components/myComponents/TableShowSelect";
 
 export default function ViewCategories() {
   const [openDialog, setOpenDialog] = useState(false);
   const [currentCategory, setCurrentCategory] = useState(null);
   const { data: categories, isLoading, error } = useCategories();
+  // pagination
+  const [page, setPage] = useState(1);
+  const [show, setShow] = useState(10);
   if (error) return <div>Error...!</div>;
   return (
     <>
@@ -52,6 +56,7 @@ export default function ViewCategories() {
                 <DropdownMenuItem>Export</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
+            <TableShowSelect show={show} setShow={setShow} />
           </CardAction>
         </CardHeader>
         <hr />
@@ -64,7 +69,7 @@ export default function ViewCategories() {
             </div>
           ) : (
             <ViewCategoriesTable
-              categories={categories}
+              categories={categories.slice((page - 1) * show, page * show)}
               setOpenDialog={setOpenDialog}
               setCurrentCategory={setCurrentCategory}
             />
@@ -72,7 +77,12 @@ export default function ViewCategories() {
         </CardContent>
         <Separator />
         <CardFooter>
-          <PaginationComponent />
+          <PaginationComponent
+            totalItems={categories?.length}
+            itemsPerPage={show}
+            currentPage={page}
+            onPageChange={setPage}
+          />
         </CardFooter>
       </Card>
       {/* Delete Dialog */}

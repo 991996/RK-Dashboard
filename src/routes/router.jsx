@@ -9,6 +9,7 @@ import AddProduct from "@/features/products/pages/AddProduct";
 import EditProduct from "@/features/products/pages/EditProduct";
 import ViewProducts from "@/features/products/pages/ViewProducts";
 import { createBrowserRouter } from "react-router-dom";
+import ViewProduct from "@/features/products/pages/ViewProduct";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,11 @@ const router = createBrowserRouter([
         path: "/editProduct/:productId",
         element: <EditProduct />,
         handle: { pageTitle: "Edit Product", navActive: "products" },
+      },
+      {
+        path: "/viewProduct/:productId",
+        element: <ViewProduct />,
+        handle: { pageTitle: "View Product", navActive: "products" },
       }, // Category
       {
         path: "/addCategory",
