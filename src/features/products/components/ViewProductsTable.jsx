@@ -18,10 +18,17 @@ import { useNavigate } from "react-router-dom";
 
 export default function ViewProductsTable({
   products = [],
+  categories = [],
   setOpenDialog,
   setCurrentProduct,
 }) {
   const navigate = useNavigate();
+
+  const getCategoryTitle = (categoryId) => {
+    const category = categories.find((c) => c.id === categoryId);
+    return category?.title || "Unknown";
+  };
+
   return (
     <Table>
       <TableHeader>
@@ -57,9 +64,7 @@ export default function ViewProductsTable({
               <TableCell>
                 <StockItem product={product} />
               </TableCell>
-              <TableCell>
-                <p className="text-gray-500">{product.category}</p>
-              </TableCell>
+              <TableCell>{getCategoryTitle(product.category)}</TableCell>
               <TableCell>
                 <RatingCell />
               </TableCell>

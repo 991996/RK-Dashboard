@@ -35,7 +35,7 @@ export const menuItems = [
   {
     section: "orders",
     icon: IoBagHandle,
-    items: [{ title: "Settings", path: "/settings" }],
+    path: "/orders",
   },
   {
     section: "purchases",

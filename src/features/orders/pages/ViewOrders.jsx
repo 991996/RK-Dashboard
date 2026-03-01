@@ -6,52 +6,43 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import PrimaryButton from "@/components/myComponents/PrimaryButton";
-import { Link } from "react-router-dom";
+import { ordersBlocksList, ordersList } from "@/data/orderList";
 import { useState } from "react";
-import TableLoader from "@/components/myComponents/TableLoader";
 import {
   DropdownMenu,
+  DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import OutlineButton from "@/components/myComponents/OutlineButton";
-import { ChevronDown, Star, StarIcon } from "lucide-react";
-import { Separator } from "@/components/ui/separator";
-import DeleteDialog from "../components/DeleteCategoryDialog";
-import ViewCategoriesTable from "../components/ViewCategoriesTable";
-import PaginationComponent from "@/components/myComponents/TablePagination";
-import { useCategories } from "../categoryQueries";
+import { ChevronDown } from "lucide-react";
 import TableShowSelect from "@/components/myComponents/TableShowSelect";
-import { categoryList } from "@/data/categoryList";
+import ViewOrdersTable from "../components/ViewOrdersTable";
+import { Separator } from "@/components/ui/separator";
+import PaginationComponent from "@/components/myComponents/TablePagination";
 
-export default function ViewCategories() {
-  const [openDialog, setOpenDialog] = useState(false);
-  const [currentCategory, setCurrentCategory] = useState(null);
-  const { data: categories, isLoading, error } = useCategories();
+export default function ViewOrders() {
+  const orders = ordersList;
+  //   const [openDialog, setOpenDialog] = useState(false);
+  //   const [currentOrder, setCurrentOrder] = useState(null);
+  const isLoading = false;
   // pagination
   const [page, setPage] = useState(1);
   const [show, setShow] = useState(10);
-  if (error) return <div>Error...!</div>;
   return (
     <div className="flex flex-col gap-5">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {categoryList.map((cat, index) => {
-          return <CategoryBlock key={index} category={cat} />;
+        {ordersBlocksList.map((order, index) => {
+          return <OrderBlock key={index} order={order} />;
         })}
       </div>
       <Card className="mb-10">
         <CardHeader>
           <CardTitle className="font-hanken text-gray-700">
-            All Categories List
+            All Orders List
           </CardTitle>
 
           <CardAction className="flex gap-1">
-            {/* Add Category button */}
-            <Link to="/addCategory">
-              <PrimaryButton text="Add Category" />
-            </Link>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <OutlineButton text="This month" icon={<ChevronDown />} />
@@ -74,17 +65,17 @@ export default function ViewCategories() {
               <TableLoader />
             </div>
           ) : (
-            <ViewCategoriesTable
-              categories={categories.slice((page - 1) * show, page * show)}
-              setOpenDialog={setOpenDialog}
-              setCurrentCategory={setCurrentCategory}
+            <ViewOrdersTable
+              orders={orders.slice((page - 1) * show, page * show)}
+              //   setOpenDialog={setOpenDialog}
+              //   setCurrentOrder={setCurrentOrder}
             />
           )}
         </CardContent>
         <Separator />
         <CardFooter>
           <PaginationComponent
-            totalItems={categories?.length}
+            totalItems={orders?.length}
             itemsPerPage={show}
             currentPage={page}
             onPageChange={setPage}
@@ -92,32 +83,31 @@ export default function ViewCategories() {
         </CardFooter>
       </Card>
       {/* Delete Dialog */}
-      <DeleteDialog
+      {/* <DeleteDialog
         open={openDialog}
         setOpen={setOpenDialog}
         category={currentCategory}
-      />
+      /> */}
     </div>
   );
 }
 
-function CategoryBlock({ category }) {
+function OrderBlock({ order }) {
   return (
     <Card>
       <CardContent>
-        <div className="flex flex-col justify-center items-center gap-3">
+        <div className="flex items-center justify-between">
           <div
-            className="w-full h-30 rounded-lg"
-            style={{ backgroundColor: category.bgColor }}
+            className="flex flex-col justify-between h-full
+          text-lg font-semibold"
           >
-            <img
-              src={category?.image}
-              className="w-full h-full object-contain"
-            />
+            <p>{order?.title}</p>
+            <p className="text-gray-500">{order?.number}</p>
           </div>
-          <p className="font-semibold text-gray-600 text-lg">
-            {category?.title}
-          </p>
+          {/* Icon */}
+          <div className="text-primary-red bg-primary-red/20 p-3 rounded-md">
+            <order.icon size={35} />
+          </div>
         </div>
       </CardContent>
     </Card>

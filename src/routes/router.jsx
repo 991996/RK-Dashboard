@@ -10,6 +10,7 @@ import EditProduct from "@/features/products/pages/EditProduct";
 import ViewProducts from "@/features/products/pages/ViewProducts";
 import { createBrowserRouter } from "react-router-dom";
 import ViewProduct from "@/features/products/pages/ViewProduct";
+import ViewOrders from "@/features/orders/pages/ViewOrders";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +61,11 @@ const router = createBrowserRouter([
         path: "/editCategory/:categoryId",
         element: <EditCategory />,
         handle: { pageTitle: "Edit Category", navActive: "category" },
+      }, //Orders
+      {
+        path: "/orders",
+        element: <ViewOrders />,
+        handle: { pageTitle: "View Orders", navActive: "orders" },
       },
       {
         path: "*",

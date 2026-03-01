@@ -24,15 +24,44 @@ import ViewProductsTable from "../components/ViewProductsTable";
 import DeleteDialog from "../components/DeleteProductDialog";
 import { useProducts } from "../productQueries";
 import TableShowSelect from "@/components/myComponents/TableShowSelect";
+import { useCategories } from "@/features/categories/categoryQueries";
 
 export default function ViewProducts() {
   const [openDialog, setOpenDialog] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(null);
   const { data: products, isLoading, error } = useProducts();
+  // get the category title for every product
+  const { data: categories = [], isLoading: catLoading } = useCategories();
+
   // pagination
   const [page, setPage] = useState(1);
   const [show, setShow] = useState(10);
-  if (error) return <div>Error...!</div>;
+
+  // TODO FIX PAGINATION
+  //   // عدد المنتجات الكلي
+  // const totalProducts = products.length;
+
+  // // عدد العناصر لكل صفحة
+  // const show = 50; // يمكن تغييره لأي رقم
+
+  // // حساب عدد الصفحات
+  // const totalPages = Math.ceil(totalProducts / show);
+
+  // // التأكد أن الصفحة الحالية ضمن الحد
+  // let currentPage = page;
+  // if (currentPage < 1) currentPage = 1;
+  // if (currentPage > totalPages) currentPage = totalPages;
+
+  // // حساب البداية والنهاية للـ slice
+  // const startIndex = (currentPage - 1) * show;
+  // const endIndex = currentPage * show;
+
+  // // أخذ المنتجات للصفحة الحالية
+  // const paginatedProducts = products.slice(startIndex, endIndex);
+
+  // console.log("Current Page:", currentPage);
+  // console.log("Products on this page:", paginatedProducts);
+
   return (
     <>
       <Card className="mb-10">
@@ -60,16 +89,18 @@ export default function ViewProducts() {
           </CardAction>
         </CardHeader>
         <hr />
-
+        {/* Products table */}
         <CardContent>
-          {/* Products table */}
-          {isLoading ? (
-            <div className=" h-[50vh] flex justify-center items-center">
-              <TableLoader />
-            </div>
+          {/* error */}
+          {error && <div className="text-red-500">Error loading products</div>}
+
+          {/* loading */}
+          {isLoading || catLoading ? (
+            <TableLoader />
           ) : (
             <ViewProductsTable
               products={products.slice((page - 1) * show, page * show)}
+              categories={categories}
               setOpenDialog={setOpenDialog}
               setCurrentProduct={setCurrentProduct}
             />

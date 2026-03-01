@@ -17,6 +17,7 @@ import { useDeleteProduct } from "../productQueries";
 export default function DeleteDialog({ open, setOpen, product }) {
   const deleteMutation = useDeleteProduct();
   const handleDelete = () => {
+    if (!product?.firestoreId) return;
     deleteMutation.mutate(product.firestoreId);
   };
   return (
@@ -42,7 +43,7 @@ export default function DeleteDialog({ open, setOpen, product }) {
           <DialogDescription></DialogDescription>
         </DialogHeader>
 
-        <ProductItem product={product} />
+        {product && <ProductItem product={product} />}
 
         <DialogFooter>
           <DialogClose asChild>

@@ -1,6 +1,6 @@
 import { db } from "@/lib/firebase";
 import {
-  addDoc,
+  setDoc,
   collection,
   serverTimestamp,
   getDocs,
@@ -13,12 +13,17 @@ import {
 // CREATE CATEGORY
 export const createCategory = async (category) => {
   try {
-    const docRef = await addDoc(collection(db, "categories"), {
+    const docRef = doc(collection(db, "categories")); // هنا ينشئ الـ docRef مع id
+    const newCategory = {
       ...category,
+      id: docRef.id,
       images: ["https://techzaa.in/larkon/admin/assets/images/product/p-6.png"],
       createdAt: serverTimestamp(),
-    });
-    return docRef.id;
+    };
+
+    await setDoc(docRef, newCategory);
+
+    return newCategory;
   } catch (error) {
     console.log("Error While adding a category", error);
     throw error;

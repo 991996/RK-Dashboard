@@ -21,18 +21,21 @@ export default function ImagesCarousel2({ images = [] }) {
   return (
     <Card>
       <CardContent>
-        <div>
-          <img src={current} />
+        <div className="w-full aspect-square">
+          <img
+            src={current}
+            className="w-full h-full object-cover rounded-md"
+          />
         </div>
         <Carousel className="w-full">
           <CarouselContent>
             {images.map((image, index) => (
               <CarouselItem key={index} className="basis-1/4 pl-1">
                 <div
-                  className="p-1 cursor-pointer"
+                  className="pt-1 cursor-pointer aspect-square"
                   onClick={() => setCurrent(image)}
                 >
-                  <img src={image} />
+                  <img src={image} className="w-full h-full object-cover" />
                 </div>
               </CarouselItem>
             ))}
