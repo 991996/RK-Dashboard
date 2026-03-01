@@ -11,6 +11,7 @@ import ViewProducts from "@/features/products/pages/ViewProducts";
 import { createBrowserRouter } from "react-router-dom";
 import ViewProduct from "@/features/products/pages/ViewProduct";
 import ViewOrders from "@/features/orders/pages/ViewOrders";
+import SignIn from "@/features/auth/SignIn";
 
 const router = createBrowserRouter([
   {
@@ -67,11 +68,16 @@ const router = createBrowserRouter([
         element: <ViewOrders />,
         handle: { pageTitle: "View Orders", navActive: "orders" },
       },
+
       {
         path: "*",
         element: <NotFound404 />,
       },
     ],
+  },
+  {
+    path: "/signin",
+    element: <SignIn />,
   },
   {
     path: "*",
