@@ -5,10 +5,18 @@ import Activity from "./Activity";
 import Profile from "./Profile";
 import SearchBar from "./SearchBar";
 import { Logs } from "lucide-react";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import SideBar from "@/components/layout/sideBar/SideBar";
+import { useState } from "react";
 
-export default function NavBar({ pageTitle = "Dashboard" }) {
+export default function NavBar({ pageTitle = "Dashboard", navActive }) {
+  const [openSheet, setOpenSheet] = useState(false);
   return (
     <div className="z-50 w-full sticky top-0 left-0 py-6 bg-primary-white dark:bg-primary-black">
       {/* Content */}
@@ -16,12 +24,17 @@ export default function NavBar({ pageTitle = "Dashboard" }) {
         <div className="flex items-center gap-4 text-gray-500 dark:text-gray-300 duration-300">
           {/* SideBar icon */}
           <div className="lg:hidden">
-            <Sheet>
+            <Sheet open={openSheet} onOpenChange={setOpenSheet}>
               <SheetTrigger asChild className=" cursor-pointer">
                 <Logs />
               </SheetTrigger>
+              <SheetTitle></SheetTitle>
+              <SheetDescription></SheetDescription>
               <SheetContent side="left" className="p-0 w-64 border-none">
-                <SideBar />
+                <SideBar
+                  navActive={navActive}
+                  closeSheet={() => setOpenSheet(false)}
+                />
               </SheetContent>
             </Sheet>
           </div>

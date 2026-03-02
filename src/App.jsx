@@ -17,7 +17,7 @@ function App() {
         </div>
 
         <div className=" w-full flex flex-col gap-0 px-6">
-          <NavBar pageTitle={pageTitle} />
+          <NavBar pageTitle={pageTitle} navActive={navActive} />
           <Outlet />
         </div>
       </div>

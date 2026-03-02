@@ -9,8 +9,9 @@ import {
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { BsFillPinAngleFill, BsFillPinFill } from "react-icons/bs";
+import { SheetClose } from "@/components/ui/sheet";
 
-export default function SideBar({ navActive }) {
+export default function SideBar({ navActive, closeSheet }) {
   const [pin, setPin] = useState(true);
   const [hover, setHover] = useState(false);
   return (
@@ -60,6 +61,7 @@ export default function SideBar({ navActive }) {
             <Link
               key={index}
               to={menu.path}
+              onClick={closeSheet}
               className={`${
                 navActive?.toLowerCase() === menu.section?.toLowerCase()
                   ? "text-gray-50 border-l-4 border-primary-red"
@@ -93,6 +95,7 @@ export default function SideBar({ navActive }) {
                         <Link
                           to={item.path}
                           key={i}
+                          onClick={closeSheet}
                           className="px-4 font-[450]
                         hover:text-gray-50 duration-300"
                         >

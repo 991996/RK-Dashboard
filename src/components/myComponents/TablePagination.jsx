@@ -9,15 +9,12 @@ import {
 } from "@/components/ui/pagination";
 
 export default function PaginationComponent({
-  totalItems,
-  itemsPerPage = 10,
+  totalPages,
   currentPage,
   onPageChange,
   maxVisiblePages = 5,
   className = "justify-end",
 }) {
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
-
   if (totalPages <= 1) return null;
 
   // calculate visible range

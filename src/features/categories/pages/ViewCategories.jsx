@@ -25,6 +25,7 @@ import PaginationComponent from "@/components/myComponents/TablePagination";
 import { useCategories } from "../categoryQueries";
 import TableShowSelect from "@/components/myComponents/TableShowSelect";
 import { categoryList } from "@/data/categoryList";
+import usePagination from "@/hooks/usePagination";
 
 export default function ViewCategories() {
   const [openDialog, setOpenDialog] = useState(false);
@@ -33,6 +34,12 @@ export default function ViewCategories() {
   // pagination
   const [page, setPage] = useState(1);
   const [show, setShow] = useState(10);
+  // get sliced list based on show and page
+  const { paginatedItems: paginatedCategories, totalPages } = usePagination(
+    categories,
+    page,
+    show
+  );
   if (error) return <div>Error...!</div>;
   return (
     <div className="flex flex-col gap-5">
@@ -62,7 +69,9 @@ export default function ViewCategories() {
                 <DropdownMenuItem>Export</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            <TableShowSelect show={show} setShow={setShow} />
+            {totalPages > 1 ? (
+              <TableShowSelect show={show} setShow={setShow} />
+            ) : null}
           </CardAction>
         </CardHeader>
         <hr />
@@ -75,7 +84,7 @@ export default function ViewCategories() {
             </div>
           ) : (
             <ViewCategoriesTable
-              categories={categories.slice((page - 1) * show, page * show)}
+              categories={paginatedCategories}
               setOpenDialog={setOpenDialog}
               setCurrentCategory={setCurrentCategory}
             />
@@ -85,7 +94,7 @@ export default function ViewCategories() {
         <CardFooter>
           <PaginationComponent
             totalItems={categories?.length}
-            itemsPerPage={show}
+            totalPages={totalPages}
             currentPage={page}
             onPageChange={setPage}
           />

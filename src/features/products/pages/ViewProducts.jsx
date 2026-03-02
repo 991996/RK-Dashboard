@@ -25,6 +25,7 @@ import DeleteDialog from "../components/DeleteProductDialog";
 import { useProducts } from "../productQueries";
 import TableShowSelect from "@/components/myComponents/TableShowSelect";
 import { useCategories } from "@/features/categories/categoryQueries";
+import usePagination from "@/hooks/usePagination";
 
 export default function ViewProducts() {
   const [openDialog, setOpenDialog] = useState(false);
@@ -37,30 +38,12 @@ export default function ViewProducts() {
   const [page, setPage] = useState(1);
   const [show, setShow] = useState(10);
 
-  // TODO FIX PAGINATION
-  //   // عدد المنتجات الكلي
-  // const totalProducts = products.length;
-
-  // // عدد العناصر لكل صفحة
-  // const show = 50; // يمكن تغييره لأي رقم
-
-  // // حساب عدد الصفحات
-  // const totalPages = Math.ceil(totalProducts / show);
-
-  // // التأكد أن الصفحة الحالية ضمن الحد
-  // let currentPage = page;
-  // if (currentPage < 1) currentPage = 1;
-  // if (currentPage > totalPages) currentPage = totalPages;
-
-  // // حساب البداية والنهاية للـ slice
-  // const startIndex = (currentPage - 1) * show;
-  // const endIndex = currentPage * show;
-
-  // // أخذ المنتجات للصفحة الحالية
-  // const paginatedProducts = products.slice(startIndex, endIndex);
-
-  // console.log("Current Page:", currentPage);
-  // console.log("Products on this page:", paginatedProducts);
+  // get sliced list based on show and page
+  const { paginatedItems: paginatedProducts, totalPages } = usePagination(
+    products,
+    page,
+    show
+  );
 
   return (
     <>
@@ -85,7 +68,9 @@ export default function ViewProducts() {
                 <DropdownMenuItem>Export</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            <TableShowSelect show={show} setShow={setShow} />
+            {totalPages > 1 ? (
+              <TableShowSelect show={show} setShow={setShow} />
+            ) : null}
           </CardAction>
         </CardHeader>
         <hr />
@@ -99,7 +84,7 @@ export default function ViewProducts() {
             <TableLoader />
           ) : (
             <ViewProductsTable
-              products={products.slice((page - 1) * show, page * show)}
+              products={paginatedProducts}
               categories={categories}
               setOpenDialog={setOpenDialog}
               setCurrentProduct={setCurrentProduct}
@@ -110,7 +95,7 @@ export default function ViewProducts() {
         <CardFooter>
           <PaginationComponent
             totalItems={products?.length}
-            itemsPerPage={show}
+            totalPages={totalPages}
             currentPage={page}
             onPageChange={setPage}
           />
