@@ -99,3 +99,30 @@
     clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0);
   }
 }
+
+/* Button Loader */
+
+.button-loader {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 16px 0 #fff, -16px 0 #fff;
+  position: relative;
+  animation: flash 0.5s ease-out infinite alternate;
+}
+
+@keyframes flash {
+  0% {
+    background-color: #fff2;
+    box-shadow: 16px 0 #fff2, -16px 0 #fff;
+  }
+  50% {
+    background-color: #fff;
+    box-shadow: 16px 0 #fff2, -16px 0 #fff2;
+  }
+  100% {
+    background-color: #fff2;
+    box-shadow: 16px 0 #fff, -16px 0 #fff2;
+  }
+}

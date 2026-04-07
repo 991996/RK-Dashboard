@@ -1,7 +1,7 @@
-import OutlineButton from "@/components/myComponents/OutlineButton";
+import OutlineButton from "@/components/myComponents/buttons/OutlineButton";
 import { CircleCheckBig } from "lucide-react";
 import { Link } from "react-router-dom";
-import PrimaryButton from "@/components/myComponents/PrimaryButton";
+import PrimaryButton from "@/components/myComponents/buttons/PrimaryButton";
 
 export default function AddedSuccessfully() {
   return (

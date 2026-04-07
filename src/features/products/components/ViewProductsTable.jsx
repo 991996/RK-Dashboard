@@ -9,7 +9,7 @@ import {
 import ProductItem from "./ProductItem";
 import { Checkbox } from "@/components/ui/checkbox";
 import { FaStar } from "react-icons/fa6";
-import IconButton from "@/components/myComponents/IconButton";
+import IconButton from "@/components/myComponents/buttons/IconButton";
 import { IoEyeOutline } from "react-icons/io5";
 import { CiEdit } from "react-icons/ci";
 import { AiOutlineDelete } from "react-icons/ai";

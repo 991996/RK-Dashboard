@@ -7,8 +7,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import OutlineButton from "@/components/myComponents/OutlineButton";
-import PrimaryButton from "@/components/myComponents/PrimaryButton";
+import OutlineButton from "@/components/myComponents/buttons/OutlineButton";
+import PrimaryButton from "@/components/myComponents/buttons/PrimaryButton";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertTriangleIcon } from "lucide-react";
 import CategoryItem from "./CategoryItem";

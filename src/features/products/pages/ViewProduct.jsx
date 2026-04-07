@@ -2,7 +2,7 @@ import ImagesCarousel2 from "@/components/myComponents/images/ImagesCarousel2";
 import ProductDetailsCard from "../components/ProductDetailsCard";
 import { useParams } from "react-router-dom";
 import { useProduct } from "../productQueries";
-import TableLoader from "@/components/myComponents/TableLoader";
+import TableLoader from "@/components/myComponents/loaders/TableLoader";
 
 export default function ViewProduct() {
   const { productId } = useParams();

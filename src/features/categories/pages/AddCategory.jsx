@@ -1,6 +1,6 @@
 import UploadPhoto from "@/components/myComponents/images/UploadPhoto";
-import PrimaryButton from "@/components/myComponents/PrimaryButton";
-import OutlineButton from "@/components/myComponents/OutlineButton";
+import PrimaryButton from "@/components/myComponents/buttons/PrimaryButton";
+import OutlineButton from "@/components/myComponents/buttons/OutlineButton";
 import { Link } from "react-router-dom";
 import { useReducer } from "react";
 import categoryReducer from "@/features/categories/reducer/categoryReducer";
@@ -27,13 +27,11 @@ export default function AddCategory() {
       <div className="flex flex-col  gap-4 col-span-1 order-2 xl:order-1">
         <CategoryCard category={category} />
         <div className="flex flex-col gap-3">
-          <PrimaryButton
-            text={mutation.isPending ? "Saving..." : "Submit"}
-            onClick={handleSave}
-            disabled={mutation.isPending}
-          />
+          <PrimaryButton onClick={handleSave} disabled={mutation.isPending}>
+            {mutation.isPending ? "Saving..." : "Submit"}
+          </PrimaryButton>
           <Link to="/products" className="w-full cursor-pointer">
-            <OutlineButton text="Cancel" className="w-full" />
+            <OutlineButton className="w-full">Cancel</OutlineButton>
           </Link>
         </div>
       </div>

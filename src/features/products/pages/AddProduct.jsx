@@ -2,11 +2,11 @@ import { PricingDetails } from "../components/PricingDetails";
 import ProductCard from "../components/ProductCard";
 import { ProductInfoForm } from "../components/ProductInfoForm";
 import UploadPhoto from "../../../components/myComponents/images/UploadPhoto";
-import PrimaryButton from "@/components/myComponents/PrimaryButton";
-import OutlineButton from "@/components/myComponents/OutlineButton";
+import PrimaryButton from "@/components/myComponents/buttons/PrimaryButton";
+import OutlineButton from "@/components/myComponents/buttons/OutlineButton";
 import { useReducer } from "react";
 import productReducer from "@/features/products/reducer/productReducer";
-import UploadLoader from "@/components/myComponents/UploadLoader";
+import UploadLoader from "@/components/myComponents/loaders/UploadLoader";
 import { Link } from "react-router-dom";
 import { productInitialState } from "@/data/initialState";
 import { useAddProduct } from "../productQueries";
@@ -29,13 +29,11 @@ export default function AddProduct() {
       <div className="flex flex-col  gap-4 col-span-1 order-2 xl:order-1">
         <ProductCard product={product} />
         <div className="flex flex-col gap-3">
-          <PrimaryButton
-            text={mutation.isPending ? "Saving..." : "Submit"}
-            onClick={handleSave}
-            disabled={mutation.isPending}
-          />
+          <PrimaryButton onClick={handleSave} disabled={mutation.isPending}>
+            {mutation.isPending ? "Saving..." : "Submit"}
+          </PrimaryButton>
           <Link to="/products" className="w-full cursor-pointer">
-            <OutlineButton text="Cancel" className="w-full" />
+            <OutlineButton className="w-full">Cancel</OutlineButton>
           </Link>
         </div>
       </div>

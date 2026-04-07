@@ -1,9 +1,9 @@
 import UploadPhoto from "@/components/myComponents/images/UploadPhoto";
-import PrimaryButton from "@/components/myComponents/PrimaryButton";
-import OutlineButton from "@/components/myComponents/OutlineButton";
+import PrimaryButton from "@/components/myComponents/buttons/PrimaryButton";
+import OutlineButton from "@/components/myComponents/buttons/OutlineButton";
 import { useEffect, useReducer } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import TableLoader from "@/components/myComponents/TableLoader";
+import TableLoader from "@/components/myComponents/loaders/TableLoader";
 import { toast } from "sonner";
 import { categoryInitialState } from "@/data/initialState";
 import categoryReducer from "@/features/categories/reducer/categoryReducer";
@@ -62,11 +62,12 @@ export default function EditCategory() {
         <CategoryCard category={category} />
         <div className="flex flex-col gap-3">
           <PrimaryButton
-            text={updateMutation.isPending ? "Saving..." : "Submit"}
             onClick={handleEdit}
             disabled={updateMutation.isPending}
-          />
-          <OutlineButton text="Cancel" onClick={() => navigate(-1)} />
+          >
+            {updateMutation.isPending ? "Saving..." : "Submit"}
+          </PrimaryButton>
+          <OutlineButton onClick={() => navigate(-1)}>Cancel</OutlineButton>
         </div>
       </div>
       <div className="col-span-3 flex flex-col gap-4 order-1 xl:order-2">

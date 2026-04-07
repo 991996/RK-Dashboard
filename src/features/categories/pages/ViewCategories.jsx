@@ -6,17 +6,17 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import PrimaryButton from "@/components/myComponents/PrimaryButton";
+import PrimaryButton from "@/components/myComponents/buttons/PrimaryButton";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import TableLoader from "@/components/myComponents/TableLoader";
+import TableLoader from "@/components/myComponents/loaders/TableLoader";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import OutlineButton from "@/components/myComponents/OutlineButton";
+import OutlineButton from "@/components/myComponents/buttons/OutlineButton";
 import { ChevronDown, Star, StarIcon } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import DeleteDialog from "../components/DeleteCategoryDialog";
@@ -57,11 +57,17 @@ export default function ViewCategories() {
           <CardAction className="flex gap-1">
             {/* Add Category button */}
             <Link to="/addCategory">
-              <PrimaryButton text="Add Category" />
+              <PrimaryButton className="flex items-center">
+                <span className="hidden md:inline">Add Category</span>
+                <span className="md:hidden">Add</span>
+              </PrimaryButton>
             </Link>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <OutlineButton text="This month" icon={<ChevronDown />} />
+                <OutlineButton className="flex items-center">
+                  <span className="hidden md:inline">This month</span>
+                  <ChevronDown />
+                </OutlineButton>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuItem>Download</DropdownMenuItem>

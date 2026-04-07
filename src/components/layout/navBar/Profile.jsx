@@ -1,19 +1,14 @@
 import profile from "@/assets/profile.jpg";
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { logout } from "@/store/authSlice";
 import {
   CircleUserRound,
   MessageSquareMore,
@@ -22,8 +17,18 @@ import {
   LockKeyhole,
   LogOut,
 } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
+  const user = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/signin", { replace: true });
+  };
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -33,7 +38,7 @@ export default function Profile() {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-40 pl-2" align="start">
         <DropdownMenuGroup>
-          <DropdownMenuLabel>Welcome Raneem</DropdownMenuLabel>
+          <DropdownMenuLabel>Welcome {user.name}</DropdownMenuLabel>
           <DropdownMenuItem className="cursor-pointer">
             <CircleUserRound />
             Profile
@@ -58,7 +63,10 @@ export default function Profile() {
         <DropdownMenuSeparator />
 
         <DropdownMenuGroup>
-          <DropdownMenuItem className="text-primary-red hover:text-primary-red! cursor-pointer">
+          <DropdownMenuItem
+            className="text-primary-red hover:text-primary-red! cursor-pointer"
+            onClick={handleLogout}
+          >
             <LogOut className="text-primary-red" />
             Log out
           </DropdownMenuItem>

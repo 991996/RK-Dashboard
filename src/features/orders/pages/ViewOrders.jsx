@@ -14,7 +14,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import OutlineButton from "@/components/myComponents/OutlineButton";
+import OutlineButton from "@/components/myComponents/buttons/OutlineButton";
 import { ChevronDown } from "lucide-react";
 import TableShowSelect from "@/components/myComponents/TableShowSelect";
 import ViewOrdersTable from "../components/ViewOrdersTable";

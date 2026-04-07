@@ -13,62 +13,66 @@ import ViewProduct from "@/features/products/pages/ViewProduct";
 import ViewOrders from "@/features/orders/pages/ViewOrders";
 import SignIn from "@/features/auth/SignIn";
 
+import ProtectedRoute from "./ProtectedRoute";
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <ProtectedRoute />,
     children: [
       {
         index: true,
         element: <Dashboard />,
         handle: { pageTitle: "Dashboard", navActive: "dashboard" },
-      }, // Products
+      },
+      // Products
       {
-        path: "/addProduct",
+        path: "addProduct",
         element: <AddProduct />,
         handle: { pageTitle: "Create Product", navActive: "products" },
       },
       {
-        path: "/added_successfully",
+        path: "added_successfully",
         element: <AddedSuccessfully />,
         handle: { pageTitle: "Create Product", navActive: "products" },
       },
       {
-        path: "/products",
+        path: "products",
         element: <ViewProducts />,
         handle: { pageTitle: "Products", navActive: "products" },
       },
       {
-        path: "/editProduct/:productId",
+        path: "editProduct/:productId",
         element: <EditProduct />,
         handle: { pageTitle: "Edit Product", navActive: "products" },
       },
       {
-        path: "/viewProduct/:productId",
+        path: "viewProduct/:productId",
         element: <ViewProduct />,
         handle: { pageTitle: "View Product", navActive: "products" },
-      }, // Category
+      },
+      // Category
       {
-        path: "/addCategory",
+        path: "addCategory",
         element: <AddCategory />,
         handle: { pageTitle: "Create Category", navActive: "category" },
       },
       {
-        path: "/categories",
+        path: "categories",
         element: <ViewCategories />,
         handle: { pageTitle: "Categories", navActive: "category" },
       },
       {
-        path: "/editCategory/:categoryId",
+        path: "editCategory/:categoryId",
         element: <EditCategory />,
         handle: { pageTitle: "Edit Category", navActive: "category" },
-      }, //Orders
+      },
+      // Orders
       {
-        path: "/orders",
+        path: "orders",
         element: <ViewOrders />,
         handle: { pageTitle: "View Orders", navActive: "orders" },
       },
-
       {
         path: "*",
         element: <NotFound404 />,

@@ -1,21 +1,21 @@
 import { Button } from "@/components/ui/button";
 
 export default function OutlineButton({
-  text,
   type = "button",
-  icon = null,
   onClick,
+  className = "",
+  children = null,
   ...props
 }) {
   return (
     <Button
       type={type}
       variant="outline"
-      className=" capitalize rounded-lg cursor-pointer"
+      className={`${className} capitalize rounded-lg cursor-pointer`}
       onClick={onClick}
       {...props}
     >
-      {text} {icon}
+      {children}
     </Button>
   );
 }
