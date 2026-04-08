@@ -3,6 +3,11 @@ import DashCard from "./dashboard/DashCard";
 import WarningMessage from "@/components/myComponents/WarningMessage";
 import PerformanceChart from "./dashboard/charts/PerformanceChart";
 import ProductsChart from "./dashboard/charts/ProductsChart";
+import CountryChart from "./dashboard/charts/CountryChart";
+import TopPagesTable from "./dashboard/TopPagesTable";
+import ViewOrders from "@/features/orders/pages/ViewOrders";
+import ViewOrdersTable from "@/features/orders/components/ViewOrdersTable";
+import RecentOrders from "./dashboard/RecentOrders";
 
 export default function Dashboard() {
   return (
@@ -25,9 +30,12 @@ export default function Dashboard() {
           <PerformanceChart />
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2">
         <ProductsChart />
+        <CountryChart />
+        <TopPagesTable />
       </div>
+      <RecentOrders />
     </div>
   );
 }

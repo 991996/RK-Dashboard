@@ -7,18 +7,13 @@ import {
   ResponsiveContainer,
   Cell,
 } from "recharts";
-import { Card, CardFooter } from "@/components/ui/card";
-import { productsChartData } from "@/data/dashboard";
-
-// 🎨 الألوان
-const COLORS = [
-  "#6366F1", // Indigo
-  "#22C55E", // Green
-  "#F59E0B", // Amber
-  "#EF4444", // Red
-  "#3B82F6", // Blue
-  "#A855F7", // Purple
-];
+import {
+  Card,
+  CardFooter,
+  CardHeader,
+  CardContent,
+} from "@/components/ui/card";
+import { chartCOLORS, productsChartData } from "@/data/dashboard";
 
 const renderActiveShape = (props) => {
   const {
@@ -113,38 +108,41 @@ function ProductsChart() {
 
   return (
     <Card>
-      <ResponsiveContainer width="100%" height={300}>
-        <PieChart
-          margin={{
-            top: 0,
-            right: 100,
-            bottom: 0,
-            left: 100,
-          }}
-        >
-          <Pie
-            data={productsChartData}
-            dataKey="value"
-            cx="50%"
-            cy="50%"
-            innerRadius="60%"
-            outerRadius="80%"
-            activeIndex={activeIndex}
-            activeShape={renderActiveShape}
-            onMouseEnter={handleMouseEnter}
+      <CardHeader>
+        <p className="font-semibold text-lg">Products</p>
+      </CardHeader>
+      <CardContent>
+        <ResponsiveContainer width="100%" height={300}>
+          <PieChart
+            margin={{
+              right: 100,
+              left: 100,
+            }}
           >
-            {/* 🎨 توزيع الألوان */}
-            {productsChartData.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
-              />
-            ))}
-          </Pie>
+            <Pie
+              data={productsChartData}
+              dataKey="value"
+              cx="50%"
+              cy="50%"
+              innerRadius="60%"
+              outerRadius="80%"
+              activeIndex={activeIndex}
+              activeShape={renderActiveShape}
+              onMouseEnter={handleMouseEnter}
+            >
+              {/* 🎨 توزيع الألوان */}
+              {productsChartData.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={chartCOLORS[index % chartCOLORS.length]}
+                />
+              ))}
+            </Pie>
 
-          <Tooltip />
-        </PieChart>
-      </ResponsiveContainer>
+            <Tooltip />
+          </PieChart>
+        </ResponsiveContainer>
+      </CardContent>
       <CardFooter>
         <div className="flex gap-4 flex-wrap justify-center items-center">
           {productsChartData.map((p, index) => {
@@ -152,9 +150,13 @@ function ProductsChart() {
               <div className="flex gap-1 items-center" key={index}>
                 <div
                   className="w-2.5 aspect-square"
-                  style={{ backgroundColor: COLORS[index % COLORS.length] }}
+                  style={{
+                    backgroundColor: chartCOLORS[index % chartCOLORS.length],
+                  }}
                 ></div>
-                <p style={{ color: COLORS[index % COLORS.length] }}>{p.name}</p>
+                <p style={{ color: chartCOLORS[index % chartCOLORS.length] }}>
+                  {p.name}
+                </p>
               </div>
             );
           })}

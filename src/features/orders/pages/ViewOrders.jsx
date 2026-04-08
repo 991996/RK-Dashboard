@@ -45,7 +45,10 @@ export default function ViewOrders() {
           <CardAction className="flex gap-1">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <OutlineButton text="This month" icon={<ChevronDown />} />
+                <OutlineButton className="flex items-center">
+                  <span className="hidden md:inline">This month</span>
+                  <ChevronDown />
+                </OutlineButton>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuItem>Download</DropdownMenuItem>
